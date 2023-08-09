@@ -19,6 +19,7 @@ public class AccountDTO {
     private double balance;
 
     private List<TransactionDTO> transaction;
+   /* hola*/
     public AccountDTO() {
     }
     public AccountDTO(Account account){
