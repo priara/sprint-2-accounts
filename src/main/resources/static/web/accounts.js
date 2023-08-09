@@ -3,8 +3,8 @@ let { createApp } = Vue
 const options = {
     data() {
         return {
-            datos:[],
-            accounts: null,
+            response:[],
+            accounts: [],
 
         }
     },
@@ -18,11 +18,14 @@ const options = {
     methods: {
         getAccountNumber(){
             axios.get("http://localhost:8080/api/clients/1")
-            .then(datos => {
-                this.accounts = datos.data.accounts;
-                console.log(this.accounts);
+            .then(response => {
+                    console.log(response);
+                this.accounts = response.data.accounts;
+                
+                this.accounts.sort((a, b) => a.id - b.id);
 
             })
+            .catch((error) => console.log(error));
         },
                 
         }

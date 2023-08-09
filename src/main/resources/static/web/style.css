@@ -1,26 +1,32 @@
+/* ACCOUNTS */
 *{
     font-family: 'Rokkitt', serif;
 }
+
+[v-cloak] {
+  display: none;
+}
+
 .logoimg{
-    width: 5rem;
+    width: 18rem;
 }
 .imgnav{
     width: 1.5rem;
 }
 .carousel-item{
-    height: 350px;
+    height: 550px;
     max-height: 550px;
 }
 .imgcarousel{
-    height: 150%;
-    object-fit: contain;
+    object-fit: cover;
 }
 nav>a:hover{
   color:#0f1e5f!important;
 }
 
+
 header{
-    background-color:#4291c6 ;
+    background-color:white ;
     min-height: 10vh;
     position: fixed;
     width: 100%;
@@ -31,13 +37,13 @@ h1{
   color: rgb(11, 11, 101);
 }
 main{
-    background-color: #CBF3D2;
+    background-color: #b4bce9;
     min-height: 80vh;
-    padding-top: 10rem;
+    padding-top: 8rem;
 }
 footer{
     min-height: 10vh;
-    background-color:#4291c6 ;
+    background-color:#011936;
 }
 .imgredes{
     width: 1rem;
@@ -57,14 +63,12 @@ nav a{
     padding: 5px;
     border: 4px solid transparent;
     cursor: pointer;
-    background-color: rgb(121, 162, 213);
-    box-shadow: 0 0 0 2px rgb(81, 93, 222), 8px 8px 0 0 rgb(114, 109, 213);
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 0 0 2px rgb(255, 255, 255), 8px 8px 0 0 rgb(232, 0, 0);
   }
   
   .article-wrapper:hover {
-    -webkit-box-shadow: 10px 10px 0 #4e84ff, 20px 20px 0 #4444bd;
-    box-shadow: 10px 10px 0 #4e84ff, 20px 20px 0 #4444bd;
-    border-color: #0578c5;
+    box-shadow: 10px 10px 0 #f20707;
     -webkit-transform: translate(-20px, -20px);
     -ms-transform: translate(-20px, -20px);
     transform: translate(-20px, -20px);
@@ -115,11 +119,10 @@ nav a{
     font-size: 1em;
     margin: 0;
     font-weight: 600;
-   /* depend de la font */
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    color: black;
+    color: rgb(0, 0, 0);
   }
   
   .flex-pr {
@@ -149,8 +152,8 @@ nav a{
     width: 50px;
     height: 50px;
     padding: 9px;
-    -webkit-transition: all 0.3s ease;
-    transition: all 0.3s ease;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
   }
   
   .container-project {
@@ -158,3 +161,25 @@ nav a{
     height: 170px;
     background: gray;
   }
+
+  /* ACCOUNT.HTML */
+.table, th, td{
+  border: 1px solid black;
+  border-collapse: collapse;
+  color: white!important;
+}
+
+th{
+  background-color: rgb(67, 64, 64)!important;
+}
+
+td{
+  background-color: rgb(147, 136, 136)!important;
+}
+
+.creditGreen{
+  color: green!important;
+}
+.debitRed{
+  color: red!important;
+}

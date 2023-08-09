@@ -77,10 +77,11 @@ public class Client {
         this.email = email;
     }
 
-    public void setAccounts(Set<Account> accounts) {
-
-        this.accounts = accounts;
+    public void setAccounts( Account account) {
+        account.setClient(this);
+        accounts.add(account);
     }
+
 
 
 

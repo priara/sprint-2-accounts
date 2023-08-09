@@ -30,15 +30,10 @@ public class ClientDTO {
         for (Account account: client.getAccounts()) {
             this.accounts.add(new AccountDTO(account));
         }
-
+    /*conviene usar map aca , no for each,para usar map tenemos que pasarlo a string con .string. despues .collect para transformarlo en
+    * el dato que necesitamos en ese momento.*/
     }
 
-    public ClientDTO(long id, String firstName, String lastName, String email) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-    }
 
     public long getId() {
         return id;
@@ -77,3 +72,7 @@ public class ClientDTO {
     }
 }
 
+/*
+ El DTO sirve para modelar la info de la forma en la que queremos mostrarla ,si quiero que el mail sea secreto
+ entonces con el dto solo pongo el cliente pero sin el mail, o por ejemplo para no mostrar contraseñas de un cliente por ejemplo
+ eso es algo privado*/

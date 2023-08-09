@@ -12,43 +12,46 @@
         <link href="https://fonts.googleapis.com/css2?family=Rokkitt&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
     <link rel="shortcut icon" href="./images/favicon.png" type="image/x-icon">
-    <title>Home Banking - Mindhub Brothers</title>
+    <title>Your accounts</title>
 </head>
 
 <body>
 
-    <header class="d-flex flex-column justify-content-between  gap-3 align-items-center flex-md-row justify-content-md-around">
-        <img class="logoimg" src="./images/logo2-removebg-preview.png" alt="">
-        <nav class="d-flex flex-wrap justify-content-center flex-sm-row align-items-center gap-2 flex-md-row gap-md-4">
-            <a class="text-light " href="#"><span ><img class="imgnav me-2" src="./images/accounts.png" alt=""></span >Accounts <span class="ms-2">|</span></a>
-            <a class="text-light " href="">Cards <span class="ms-2">|</span></a>
-            <a class="text-light " href="">Loans <span class="ms-2">|</span></a>
-            <a class="text-light " href="">Transactions <span class="ms-2">|</span></a>
-            <img class="imgnav " src="./images/exit.png" alt="">
-        </nav>
-            
+  <header
+  class="d-flex flex-column justify-content-between  gap-3 align-items-center flex-md-row justify-content-md-around">
+  <img class="logoimg" src="./images/purepng.com-bank-of-america-logol.png" alt="">
+  <nav class="d-flex flex-wrap justify-content-center flex-sm-row align-items-center gap-2 flex-md-row gap-md-4">
+      <a class="text-primary " href="#"><span><img class="imgnav me-2" src="./images/accounts.png"
+                  alt=""></span>Accounts <span class="ms-2">|</span></a>
+      <a class="text-primary " href="">Cards <span class="ms-2">|</span></a>
+      <a class="text-primary " href="">Loans <span class="ms-2">|</span></a>
+      <a class="text-primary " href="">Transactions <span class="ms-2">|</span></a>
+      <img class="imgnav " src="./images/exit.png" alt="">
+  </nav>
 
-    </header>
+
+</header>
 
     <main class=" d-flex flex-column">
       <section class="d-flex flex-column align-items-start ">
-        <h1 class="p-1 ms-3 fw-semibold">Welcome, Melba!</h1>
+        <h1 class="p-1 ms-3 fw-semibold text-dark">Welcome, Melba!</h1>
       </section>
 
       <div id="app" class="d-flex flex-wrap justify-content-center gap-5 mt-5">
-        <template v-for=" account of accounts ">
+        
+        <template v-for=" account of accounts " :key="accounts.id">
 
             <article class="article-wrapper col-10 col-md-4 gap-2">
                 <div class="project-info">
                   <div class="flex-pr">
-                    <div class="project-title fs-5 text">Account Number : {{account.number}}</div>
+                    <div class="project-title fs-4 text" v-cloak>Account Number : {{account.number}}</div>
                       <div class="project-hover">
-                        <svg style="color: black;" xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" color="black" stroke-linejoin="round" stroke-linecap="round" viewBox="0 0 24 24" stroke-width="2" fill="none" stroke="currentColor"><line y2="12" x2="19" y1="12" x1="5"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        <a v-bind:href="'./account.html?id=' + account.id"><svg style="color: black;" width="2em" height="2em" color="black" stroke-linejoin="round" stroke-linecap="round" viewBox="0 0 24 24" stroke-width="2" fill="none" stroke="currentColor"><polyline points="12 5 19 12 12 19"></polyline></svg></a>
                         </div>
                       </div>
                       <div class="types">
-                        <span style=" color: black;" class="project-type fs-5 text">Amount : ${{account.balance}}</span>
-                        <span class="project-type">Creation Date : {{account.creationDate}}</span>
+                        <span style=" color: black;" class="project-type fs-5 text" v-cloak>Amount : ${{account.balance}}</span>
+                        <span class="project-type" v-cloak>Creation Date : {{account.creationDate}}</span>
                     </div>
                 </div>
             </article>
@@ -86,13 +89,13 @@
     </main>
 
     <footer class="d-flex flex-column align-items-center flex-lg-row justify-content-lg-between p-3">
-        <p class="text-center mb-0 fw-semibold"> Mindhub Brothers Bank - 2023</p>
-        <div >
+      <p class="text-center mb-0  text-light"> Bank of America - 2023</p>
+      <div>
           <img class="imgredes" src="./images/face.png" alt="">
           <img class="imgredes" src="./images/insta.png" alt="">
           <img class="imgredes" src="./images/wpp.png" alt="">
-        </div>
-    </footer>
+      </div>
+  </footer>
 
 
 
