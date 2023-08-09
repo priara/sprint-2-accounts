@@ -61,11 +61,11 @@ public class HomebankingApplication {
 			transactionRepository.save(transaction2);
 
 
-			Transaction transaction3 = new Transaction(TransactionType.CREDIT, 880, LocalDateTime.now(), accountMelba2, "Spa Life");
+			Transaction transaction3 = new Transaction(TransactionType.CREDIT, 880, this.today.plusDays(1).atStartOfDay(), accountMelba2, "Spa Life");
 			accountMelba2.addTransaction(transaction3);
 			transactionRepository.save(transaction3);
 
-			Transaction transaction4 = new Transaction(TransactionType.DEBIT, -300, LocalDateTime.now(), accountMelba2, "Test Debit");
+			Transaction transaction4 = new Transaction(TransactionType.DEBIT, -300, this.today.plusDays(1).atStartOfDay(), accountMelba2, "Test Debit");
 			accountMelba2.addTransaction(transaction4);
 			transactionRepository.save(transaction4);
 

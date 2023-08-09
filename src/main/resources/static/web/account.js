@@ -50,10 +50,8 @@ const options = {
             return "";
         },
         formattedDate(date) {
-            console.log("Fecha recibida:", date);
             const options = { year: "numeric", month: "long", day: "numeric" , hour: '2-digit', minute: '2-digit' , second: '2-digit'};
             const formatted = new Date(date).toLocaleDateString(undefined, options);
-            console.log("Fecha formateada:", formatted);
             return formatted;
         }
 
