@@ -19,7 +19,7 @@
 
   <header
   class="d-flex flex-column justify-content-between  gap-3 align-items-center flex-md-row justify-content-md-around">
-  <img class="logoimg" src="./images/purepng.com-bank-of-america-logol.png" alt="">
+  <h2 class="p-1">Mindhub Brothers Bank</h2>
   <nav class="d-flex flex-wrap justify-content-center flex-sm-row align-items-center gap-2 flex-md-row gap-md-4">
       <a class="text-primary " href="#"><span><img class="imgnav me-2" src="./images/accounts.png"
                   alt=""></span>Accounts <span class="ms-2">|</span></a>
@@ -58,6 +58,33 @@
 
         </template>
 
+        <section class="d-flex flex-column align-items-center col-12 gap-5">
+
+          <h2>Your Loans</h2>
+
+        <template v-if="loans.length > 0" v-for=" loan of loans ">
+
+          <article class="article-wrapper articleloans col-10 col-md-6 col-lg-6 gap-2">
+            <div class="project-info">
+                <div class="flex-pr">
+                    <div class="project-title project-loans fs-4 text " v-cloak>Loan {{loan.name}}</div>
+
+                </div>
+                <div class="types">
+                    <span  style=" color: black;" class="project-type project-type-loans fs-6 text"  v-cloak>Amount : ${{ formattedAmount(loan.amount) }}</span>
+                    <span class="project-type fs-6 text project-type-loans" v-cloak>Payments : {{loan.payments}} </span>
+                </div>
+            </div>
+        </article>
+
+        </template>
+
+        <template v-else="">
+          <h3>You do not have loans</h3>
+        </template>
+
+        </section>
+
       </div>
         
 
@@ -86,14 +113,106 @@
             </button>
           </div>
 
+          <article class="d-flex flex-column align-items-center p-3" >
+
+            <h2>Choose the card that works for you</h2>
+
+            <section class="d-flex flex-column align-items-center flex-xl-row gap-5">
+
+              <section class="sectioncards d-flex flex-column align-items-center">
+                <div>
+                  <p class="pricecard">$200</p>
+                  <p class="text-danger">Online bonus offer</p>
+                </div>
+                <div class="d-flex flex-column align-items-center">
+                  <p class="text-center">No annual fee</p>
+                  <img class="imgcard" src="./images/card-red.png" alt="">
+                  <p class="text-center">Customized Cash Rewards</p>
+                  <a class="anchorarticle" href="">3% cash back in the category of your choice ></a>
+                </div>
+                
+              </section>
+
+              <section class="sectioncards d-flex flex-column align-items-center">
+                <div>
+                  <p class="pricecard">$200</p>
+                  <p class="text-danger">online bonus offer</p>
+                </div>
+                <div class="d-flex flex-column align-items-center">
+                  <p class="text-center">No annual fee</p>
+                  <img class="imgcard" src="./images/card-grey.png" alt="">
+                  <p class="text-center">Unlimited Cash Rewards</p>
+                  <a class="anchorarticle" href="">Unlimited 1.5% cash back on all purchases ></a>
+                </div>
+              </section>
+
+              <section class="sectioncards d-flex flex-column align-items-center">
+                <div>
+                  <p class="pricecard">25,000</p>
+                  <p class="text-danger">online bonus points offer</p>
+                </div>
+                <div class="d-flex flex-column align-items-center">
+                  <p class="text-center">No annual fee</p>
+                  <img class="imgcard " src="./images/card-blue.jpg" alt="">
+                  <p class="text-center">Travel Rewards</p>
+                  <a class="anchorarticle" href="">Unlimited 1.5% points for every $1 spent on all purchases ></a>
+                </div>
+              </section>
+              <section class="sectioncards d-flex flex-column align-items-center mb-4">
+                <div>
+                  <p class="pricecard text-center">0%</p>
+                  <p class="text-danger">intro APR offer</p>
+                </div>
+                <div class="d-flex flex-column align-items-center">
+                  <p class="text-center">No annual fee</p>
+                  <img class="imgcard" src="./images/card-white.png" alt="">
+                  <p class="text-center">BankAmericard</p>
+                  <a class="anchorarticle" href="">Intro APR offer for 18 billing cycles ></a>
+                </div>
+              </section>
+            </section>
+
+          </article>
+
+          <img class="capturapantalla" src="./images/Capture2.png" alt="">
+
+          <section class="sectiondivs d-flex flex-column align-items-center flex-lg-row justify-content-around gap-3 p-4">
+            <div class="div-contact">
+              <a href="https://www.google.com.ar/maps/@-34.6144254,-58.4059338,15z?entry=ttu"><img src="./images/location.png" alt=""></a>
+              <p>Branches and ATMs</p>
+              <p>Always close to you</p>
+            </div>
+
+            <div class="div-contact">
+              <img src="./images/contact.png" alt="">
+              <p>Customer Supports</p>
+              <p class="text-center">Contact us</p>
+            </div>
+
+            <div class="div-contact">
+              <img src="./images/information.png" alt="">
+              <p class="text-center">Urgent help</p>
+              <p>When you need it</p>
+            </div>
+          </section>
+
     </main>
 
-    <footer class="d-flex flex-column align-items-center flex-lg-row justify-content-lg-between p-3">
-      <p class="text-center mb-0  text-light"> Bank of America - 2023</p>
-      <div>
-          <img class="imgredes" src="./images/face.png" alt="">
-          <img class="imgredes" src="./images/insta.png" alt="">
-          <img class="imgredes" src="./images/wpp.png" alt="">
+    <footer class="d-flex flex-column align-items-center flex-lg-row justify-content-lg-between gap-2 p-3">
+      <p class="text-center mb-0  text-light"> Mindhub Brothers Bank - 2023</p>
+      <div class="d-flex flex-column align-items-center mt-3">
+        <p class="text-light">Contact Us</p>
+        <p class="text-light">Director: Priscila Araujo</p>
+        <a class="cel" href="tel:+1126360835">Cel: 1126360835</a>
+      </div>
+
+      <div class="d-flex flex-column align-items-center ">
+          <p class="text-light">Connect with us</p>
+          <div>
+            <a href="https://www.instagram.com/"><img class="imgredes" src="./images/insta.png" alt=""></a>
+            <a href="https://web.whatsapp.com/"><img class="imgredes" src="./images/wpp.png" alt=""></a>
+            <a href="https://www.facebook.com/"><img class="imgredes" src="./images/face.png" alt="" ></a>
+          </div>
       </div>
   </footer>
 

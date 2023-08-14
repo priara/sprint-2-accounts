@@ -22,7 +22,7 @@ public class Transaction {
     public Transaction() {
     }
 
-    public Transaction(TransactionType type, double amount, LocalDateTime date, Account account, String description) {
+    public Transaction(TransactionType type, double amount, LocalDateTime date, String description) {
         this.type = type;
         this.amount = amount;
         this.date = date;

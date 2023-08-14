@@ -7,9 +7,6 @@
   display: none;
 }
 
-.logoimg{
-    width: 18rem;
-}
 .imgnav{
     width: 1.5rem;
 }
@@ -46,7 +43,10 @@ footer{
     background-color:#011936;
 }
 .imgredes{
-    width: 1rem;
+    width: 1.2rem;
+}
+.cel{
+  text-decoration: none;
 }
 nav a{
     text-decoration: none;
@@ -174,7 +174,8 @@ th{
 }
 
 td{
-  background-color: rgb(147, 136, 136)!important;
+  background-color: rgb(188, 179, 179)!important;
+  color: black!important;
 }
 
 .creditGreen{
@@ -182,4 +183,44 @@ td{
 }
 .debitRed{
   color: red!important;
+}
+
+.articleloans{
+    background-color: rgb(42, 106, 179);
+    box-shadow: 0 0 0 2px rgb(11, 85, 155), 8px 8px 0 0 rgb(7, 53, 169);
+    text-align: center;
+}
+
+.articleloans:hover{
+    box-shadow: 10px 10px 0 #042083;
+}
+.project-loans{
+  color: white;
+  font-weight: 500;
+  font-size: 2rem!important;
+  
+}
+.project-type-loans{
+  color: white!important;
+  font-weight: 500;
+  font-size: 1.5rem!important;
+}
+.imgcard{
+  width: 15rem;
+}
+.pricecard{
+  font-size: 4rem;
+  color: rgb(215, 11, 11);
+}
+.text-danger{
+  font-size: 1.2rem;
+}
+.anchorarticle{
+  text-decoration: none;
+}
+.sectioncards{
+  width: 16rem;
+}
+.div-contact{
+  width: rem;
 }

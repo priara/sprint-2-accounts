@@ -5,6 +5,7 @@ const options = {
         return {
             response:[],
             accounts: [],
+            loans:[],
 
         }
     },
@@ -21,12 +22,19 @@ const options = {
             .then(response => {
                     console.log(response);
                 this.accounts = response.data.accounts;
-                
+                this.loans = response.data.loans;
                 this.accounts.sort((a, b) => a.id - b.id);
+                this.loans.sort((a, b) => a.id - b.id);
+                
+                
+
 
             })
             .catch((error) => console.log(error));
         },
+        formattedAmount(amount){
+            return amount.toLocaleString();
+        }
                 
         }
 

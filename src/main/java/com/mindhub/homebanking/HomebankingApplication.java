@@ -1,19 +1,17 @@
 package com.mindhub.homebanking;
 
-import com.mindhub.homebanking.models.Account;
-import com.mindhub.homebanking.models.Client;
-import com.mindhub.homebanking.models.Transaction;
-import com.mindhub.homebanking.models.TransactionType;
-import com.mindhub.homebanking.repositories.AccountRepository;
-import com.mindhub.homebanking.repositories.ClientRepository;
-import com.mindhub.homebanking.repositories.TransactionRepository;
+import com.mindhub.homebanking.models.*;
+import com.mindhub.homebanking.repositories.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
 
 @SpringBootApplication
 public class HomebankingApplication {
@@ -24,7 +22,7 @@ public class HomebankingApplication {
 	}
 
 	@Bean
-	public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository) {
+	public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository, LoanRepository loanRepository, ClientLoanRepository clientLoanRepository ) {
 		return (args) -> {
 			// save a couple of customers
 			/*clientRepository.save(new Client("Jack", "Bauer", "jackbauer@gmail.com"));
@@ -34,7 +32,7 @@ public class HomebankingApplication {
 
 
 
-			Client melba = new Client("melba", "morel", "melba@gmail.com");
+			Client melba = new Client("Melba", "morel", "melba@gmail.com");
 			clientRepository.save(melba);
 			Account accountMelba1 = new Account("VIN001", LocalDate.now(), 5000);
 			melba.addAccount(accountMelba1);
@@ -51,21 +49,55 @@ public class HomebankingApplication {
 			Account accountMichelle2 = new Account("VIN004", this.today.plusDays(1), 3800);
 			accountRepository.save(accountMichelle2);
 
-			Transaction transaction1 = new Transaction(TransactionType.CREDIT, 1200, LocalDateTime.now(), accountMelba1, "Cinema");
+			/*LOAN/PRESTAMOS*/
+
+			Loan mortgage = new Loan( "Mortgage", 500000, Arrays.asList(12, 24, 36, 48, 60));
+			loanRepository.save(mortgage);
+			Loan personal = new Loan( "Personal", 100000, Arrays.asList(6,12,24));
+			loanRepository.save(personal);
+			Loan auto = new Loan ("Auto", 300000, Arrays.asList( 6,12,24,36));
+			loanRepository.save(auto);
+
+			/*PRESTAMOS CLIENTE MELBA*/
+			ClientLoan melbaLoan1 = new ClientLoan( 400000 , 60);
+			melba.addClientLoan(melbaLoan1);
+			mortgage.addClientLoan(melbaLoan1);
+			clientLoanRepository.save(melbaLoan1);
+			ClientLoan melbaLoan2 = new ClientLoan(50000, 12);
+			melba.addClientLoan(melbaLoan2);
+			personal.addClientLoan(melbaLoan2);
+			clientLoanRepository.save(melbaLoan2);
+
+
+			/*PRESTAMOS CLIENTE MICHELLE*/
+			ClientLoan michelleLoan1 = new ClientLoan(100000, 24);
+			michelle.addClientLoan(michelleLoan1);
+			personal.addClientLoan(michelleLoan1);
+			clientLoanRepository.save(michelleLoan1);
+			ClientLoan michelleLoan2 = new ClientLoan(200000, 36);
+			michelle.addClientLoan(michelleLoan2);
+			auto.addClientLoan(michelleLoan2);
+			clientLoanRepository.save(michelleLoan2);
+
+
+
+			/*TRANSACTIONS*/
+
+			Transaction transaction1 = new Transaction(TransactionType.CREDIT, 1200, LocalDateTime.now(), "Cinema");
 			accountMelba1.addTransaction(transaction1);
 			transactionRepository.save(transaction1);
 
 
-			Transaction transaction2 = new Transaction(TransactionType.DEBIT, -230, LocalDateTime.now(), accountMelba1, "Test Debit");
+			Transaction transaction2 = new Transaction(TransactionType.DEBIT, -230, LocalDateTime.now(), "Test Debit");
 			accountMelba1.addTransaction(transaction2);
 			transactionRepository.save(transaction2);
 
 
-			Transaction transaction3 = new Transaction(TransactionType.CREDIT, 880, this.today.plusDays(1).atStartOfDay(), accountMelba2, "Spa Life");
+			Transaction transaction3 = new Transaction(TransactionType.CREDIT, 880, this.today.plusDays(1).atStartOfDay(), "Spa Life");
 			accountMelba2.addTransaction(transaction3);
 			transactionRepository.save(transaction3);
 
-			Transaction transaction4 = new Transaction(TransactionType.DEBIT, -300, this.today.plusDays(1).atStartOfDay(), accountMelba2, "Test Debit");
+			Transaction transaction4 = new Transaction(TransactionType.DEBIT, -300, this.today.plusDays(1).atStartOfDay(), "Test Debit");
 			accountMelba2.addTransaction(transaction4);
 			transactionRepository.save(transaction4);
 
@@ -85,11 +117,7 @@ public class HomebankingApplication {
 			accountMelba2.addTransaction(transaction8);
 			transactionRepository.save(transaction8);*/
 
-			// Actualizar las cuentas en la base de datos con las transacciones agregadas
-			accountRepository.save(accountMelba1);
-			accountRepository.save(accountMelba2);
-			/*accountRepository.save(accountMichelle1);
-			accountRepository.save(accountMichelle2);*/
+
 
 
 
