@@ -18,11 +18,11 @@
 
     <header
         class="d-flex flex-column justify-content-between  gap-3 align-items-center flex-md-row justify-content-md-around">
-        <img class="logoimg" src="./images/purepng.com-bank-of-america-logol.png" alt="">
+        <h2 class="p-1">Mindhub Brothers Bank</h2>
         <nav class="d-flex flex-wrap justify-content-center flex-sm-row align-items-center gap-2 flex-md-row gap-md-4">
-            <a class="text-primary" href="#"><span><img class="imgnav me-2" src="./images/accounts.png"
+            <a class="anchorpaint text-primary" href="./accounts.html"><span><img class="imgnav me-2" src="./images/accounts.png"
                         alt=""></span>Accounts <span class="ms-2">|</span></a>
-            <a class="text-primary " href="">Cards <span class="ms-2">|</span></a>
+            <a class="text-primary " href="./cards.html">Cards <span class="ms-2">|</span></a>
             <a class="text-primary " href="">Loans <span class="ms-2">|</span></a>
             <a class="text-primary " href="">Transactions <span class="ms-2">|</span></a>
             <img class="imgnav " src="./images/exit.png" alt="">
@@ -46,7 +46,7 @@
                     </div>
                     <div class="types">
                         <span style=" color: black;" class="project-type fs-6 text" v-cloak>Amount :
-                            ${{accountSelect.balance}}</span>
+                            {{formatter.format(accountSelect.balance)}}</span>
                         <span class="project-type fs-6 text" v-cloak>Creation Date : {{accountSelect.creationDate}} </span>
                     </div>
                 </div>
@@ -60,17 +60,17 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col" class="fw-normal">Type</th>
-                                <th scope="col" class="fw-normal">Amount</th>
-                                <th scope="col" class="fw-normal">Data</th>
-                                <th scope="col" class="fw-normal">Description</th>
+                                <th scope="col" >Type</th>
+                                <th scope="col" >Amount</th>
+                                <th scope="col" >Data</th>
+                                <th scope="col" >Description</th>
                             </tr>
                         </thead>
                         <tbody>
                             <template v-for="transaction of transactions">
                             <tr>
                                 <td v-cloak v-bind:class="getTransactionColorClass(transaction)">{{transaction.type}}</td>
-                                <td v-cloak>$ {{transaction.amount}}</td>
+                                <td v-cloak> {{formatter.format(transaction.amount)}}</td>
                                 <td v-cloak>{{formattedDate(transaction.date)}}</td>
                                 <td v-cloak>{{transaction.description}}</td>
                             </tr>
@@ -110,12 +110,21 @@
 
     </main>
 
-    <footer class="d-flex flex-column align-items-center flex-lg-row justify-content-lg-between p-3">
-        <p class="text-center mb-0  text-light"> Bank of America - 2023</p>
-        <div>
-            <img class="imgredes" src="./images/face.png" alt="">
-            <img class="imgredes" src="./images/insta.png" alt="">
-            <img class="imgredes" src="./images/wpp.png" alt="">
+    <footer class="d-flex flex-column align-items-center flex-lg-row justify-content-lg-between gap-2 p-3">
+        <p class="text-center mb-0  text-light"> Mindhub Brothers - 2023</p>
+        <div class="d-flex flex-column align-items-center mt-3">
+          <p class="text-light">Contact Us</p>
+          <p class="text-light">Director: Priscila Araujo</p>
+          <a class="cel" href="tel:+1126360835">Cel: 1126360835</a>
+        </div>
+  
+        <div class="d-flex flex-column align-items-center ">
+            <p class="text-light">Connect with us</p>
+            <div>
+              <a href="https://www.instagram.com/"><img class="imgredes" src="./images/insta.png" alt=""></a>
+              <a href="https://web.whatsapp.com/"><img class="imgredes" src="./images/wpp.png" alt=""></a>
+              <a href="https://www.facebook.com/"><img class="imgredes" src="./images/face.png" alt="" ></a>
+            </div>
         </div>
     </footer>
 

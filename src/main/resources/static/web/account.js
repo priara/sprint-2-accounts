@@ -12,6 +12,11 @@ const options = {
             transactions: [],
             creditGreen: "CREDIT",
             debitRed: "DEBIT",
+            formatter: new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 0
+            }),
 
         }
     },

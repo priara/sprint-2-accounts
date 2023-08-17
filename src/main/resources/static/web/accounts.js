@@ -6,6 +6,11 @@ const options = {
             response:[],
             accounts: [],
             loans:[],
+            formatter: new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 0
+            }),
 
         }
     },
@@ -26,15 +31,10 @@ const options = {
                 this.accounts.sort((a, b) => a.id - b.id);
                 this.loans.sort((a, b) => a.id - b.id);
                 
-                
-
 
             })
             .catch((error) => console.log(error));
         },
-        formattedAmount(amount){
-            return amount.toLocaleString();
-        }
                 
         }
 

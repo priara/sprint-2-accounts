@@ -44,17 +44,11 @@ public class AccountDTO {
         return number;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
-    }
 
     public LocalDate getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(LocalDate creationDate) {
-        this.creationDate = creationDate;
-    }
 
     public double getBalance() {
         return balance;

@@ -21,9 +21,9 @@
   class="d-flex flex-column justify-content-between  gap-3 align-items-center flex-md-row justify-content-md-around">
   <h2 class="p-1">Mindhub Brothers Bank</h2>
   <nav class="d-flex flex-wrap justify-content-center flex-sm-row align-items-center gap-2 flex-md-row gap-md-4">
-      <a class="text-primary " href="#"><span><img class="imgnav me-2" src="./images/accounts.png"
+      <a class="anchorpaint text-primary " href="#"><span><img class="imgnav me-2" src="./images/accounts.png"
                   alt=""></span>Accounts <span class="ms-2">|</span></a>
-      <a class="text-primary " href="">Cards <span class="ms-2">|</span></a>
+      <a class="text-primary " href="./cards.html">Cards <span class="ms-2">|</span></a>
       <a class="text-primary " href="">Loans <span class="ms-2">|</span></a>
       <a class="text-primary " href="">Transactions <span class="ms-2">|</span></a>
       <img class="imgnav " src="./images/exit.png" alt="">
@@ -36,7 +36,10 @@
       <section class="d-flex flex-column align-items-start ">
         <h1 class="p-1 ms-3 fw-semibold text-dark">Welcome, Melba!</h1>
       </section>
-
+      <section class="d-flex justify-content-center">
+        <h2 class="borderh2">Your Accounts</h2>
+      </section>
+      
       <div id="app" class="d-flex flex-wrap justify-content-center gap-5 mt-5">
         
         <template v-for=" account of accounts " :key="accounts.id">
@@ -50,7 +53,7 @@
                         </div>
                       </div>
                       <div class="types">
-                        <span style=" color: black;" class="project-type fs-5 text" v-cloak>Amount : ${{account.balance}}</span>
+                        <span style=" color: black;" class="project-type fs-5 text" v-cloak>Amount : {{ formatter.format(account.balance)}}</span>
                         <span class="project-type" v-cloak>Creation Date : {{account.creationDate}}</span>
                     </div>
                 </div>
@@ -60,7 +63,7 @@
 
         <section class="d-flex flex-column align-items-center col-12 gap-5">
 
-          <h2>Your Loans</h2>
+          <h2 class="borderh2">Your Loans</h2>
 
         <template v-if="loans.length > 0" v-for=" loan of loans ">
 
@@ -71,7 +74,7 @@
 
                 </div>
                 <div class="types">
-                    <span  style=" color: black;" class="project-type project-type-loans fs-6 text"  v-cloak>Amount : ${{ formattedAmount(loan.amount) }}</span>
+                    <span  style=" color: black;" class="project-type project-type-loans fs-6 text"  v-cloak>Amount : {{ formatter.format(loan.amount) }}</span>
                     <span class="project-type fs-6 text project-type-loans" v-cloak>Payments : {{loan.payments}} </span>
                 </div>
             </div>
@@ -199,11 +202,11 @@
     </main>
 
     <footer class="d-flex flex-column align-items-center flex-lg-row justify-content-lg-between gap-2 p-3">
-      <p class="text-center mb-0  text-light"> Mindhub Brothers Bank - 2023</p>
+      <p class="text-center mb-0  text-light"> Mindhub Brothers - 2023</p>
       <div class="d-flex flex-column align-items-center mt-3">
         <p class="text-light">Contact Us</p>
         <p class="text-light">Director: Priscila Araujo</p>
-        <a class="cel" href="tel:+1126360835">Cel: 1126360835</a>
+        <a class="cel " href="tel:+1126360835">Cel: 1126360835</a>
       </div>
 
       <div class="d-flex flex-column align-items-center ">

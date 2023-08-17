@@ -6,7 +6,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
+import java.time.format.DateTimeFormatter;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -16,13 +16,14 @@ import java.util.List;
 @SpringBootApplication
 public class HomebankingApplication {
 	LocalDate today = LocalDate.now();
+	LocalDate futureDate = today.plusYears(5);
 
 	public static void main(String[] args) {
 		SpringApplication.run(HomebankingApplication.class, args);
 	}
 
 	@Bean
-	public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository, LoanRepository loanRepository, ClientLoanRepository clientLoanRepository ) {
+	public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository, LoanRepository loanRepository, ClientLoanRepository clientLoanRepository, CardRepository cardRepository) {
 		return (args) -> {
 			// save a couple of customers
 			/*clientRepository.save(new Client("Jack", "Bauer", "jackbauer@gmail.com"));
@@ -80,6 +81,28 @@ public class HomebankingApplication {
 			clientLoanRepository.save(michelleLoan2);
 
 
+			/*TARJETAS*/
+
+
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/yyyy");
+			String formattedDate = today.format(formatter);
+			String formattedFutureDate = futureDate.format(formatter);
+
+			Card melbaCard1 = new Card( "Melba " + "Morel", CardType.DEBIT , CardColor.GOLD, "5542-2050-8022-7454" , 888 , formattedDate , formattedFutureDate);
+			melba.addCard(melbaCard1);
+			cardRepository.save(melbaCard1);
+
+			Card melbaCard2 = new Card("Melba " + "Morel",CardType.CREDIT , CardColor.TITANIUM, "4080-3055-7894-9010" , 412 , formattedDate , formattedFutureDate );
+			melba.addCard(melbaCard2);
+			cardRepository.save(melbaCard2);
+
+			Card melbaCard3 = new Card("Melba " + "Morel",CardType.CREDIT , CardColor.SILVER, "5542-8541-2563-7452" , 565 , formattedDate , formattedFutureDate);
+			melba.addCard(melbaCard3);
+			cardRepository.save(melbaCard3);
+
+			Card michelleCard1 = new Card("Michelle " + "Dessler", CardType.CREDIT , CardColor.SILVER, "5542-5264-3215-9856" , 931 , formattedDate , formattedFutureDate);
+			michelle.addCard(michelleCard1);
+			cardRepository.save(michelleCard1);
 
 			/*TRANSACTIONS*/
 

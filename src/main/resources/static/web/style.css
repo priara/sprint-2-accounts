@@ -21,6 +21,9 @@ nav>a:hover{
   color:#0f1e5f!important;
 }
 
+.anchorpaint{
+  color:#081448!important;
+}
 
 header{
     background-color:white ;
@@ -47,6 +50,7 @@ footer{
 }
 .cel{
   text-decoration: none;
+  color: white;
 }
 nav a{
     text-decoration: none;
@@ -166,15 +170,16 @@ nav a{
 .table, th, td{
   border: 1px solid black;
   border-collapse: collapse;
-  color: white!important;
+  color: rgb(0, 0, 0)!important;
 }
 
 th{
-  background-color: rgb(67, 64, 64)!important;
+  background-color: rgb(255, 255, 255)!important;
+  font-weight: 600!important;
 }
 
 td{
-  background-color: rgb(188, 179, 179)!important;
+  background-color: rgb(255, 255, 255)!important;
   color: black!important;
 }
 
@@ -224,3 +229,219 @@ td{
 .div-contact{
   width: rem;
 }
+
+/* CARDS.HTML */
+.card{
+  width: 320px;
+  height: 190px;
+    -webkit-perspective: 600px;
+    -moz-perspective: 600px;
+    perspective:600px;
+    background-color: transparent;
+    border: none;
+    
+    
+  }
+  
+  .card__part{
+    box-shadow: 1px 1px #aaa3a3;
+      top: 0;
+    position: absolute;
+  z-index: 1000;
+    left: 0;
+    display: inline-block;
+      width: 320px;
+      height: 190px;
+      background-image: url('./images/mapablanco.jpg'); 
+      background-blend-mode: multiply, multiply, overlay;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      border-radius: 8px;
+     
+      -webkit-transition: all .8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      -moz-transition: all .8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      -ms-transition: all .8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      -o-transition: all .8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: all .8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      -webkit-transform-style: preserve-3d;
+      -moz-transform-style: preserve-3d;
+      -webkit-backface-visibility: hidden;
+      -moz-backface-visibility: hidden;
+      box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  }
+
+  
+  .card__front{
+    padding: 18px;
+  -webkit-transform: rotateY(0);
+  -moz-transform: rotateY(0);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  }
+  
+  .card__back {
+    padding: 18px 0;
+  -webkit-transform: rotateY(-180deg);
+  -moz-transform: rotateY(-180deg);
+  }
+  
+  .card__black-line {
+      margin-top: 5px;
+      height: 38px;
+      background-color: #303030;
+  }
+  
+  .card__logo {
+      height: 16px;
+  }
+  
+  .card__front-logo{
+        position: absolute;
+      top: 18px;
+      right: 18px;
+  }
+  .card__square {
+      border-radius: 5px;
+      height: 30px;
+  }
+  
+  .card_numer {
+      display: block;
+      width: 100%;
+      word-spacing: 4px;
+      font-size: 20px;
+      letter-spacing: 2px;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 20px;
+      margin-top: 20px;
+  }
+  
+  .card__space-75 {
+      width: 75%;
+      float: left;
+  }
+  
+  .card__space-25 {
+      width: 25%;
+      float: left;
+  }
+  
+  .card__label {
+      font-size: 10px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.8);
+      letter-spacing: 1px;
+  }
+  
+  .card__info {
+      margin-bottom: 0;
+      margin-top: 5px;
+      font-size: 16px;
+      line-height: 18px;
+      color: #ffffff;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  
+  .card__back-content {
+      padding: 15px 15px 0;
+  }
+  .card__secret--last {
+      color: #303030;
+      text-align: right;
+      margin: 0;
+      font-size: 14px;
+  }
+  
+  .card__secret {
+      padding: 5px 12px;
+      background-color: #fff;
+      position:relative;
+  }
+  
+  .card__secret:before{
+    content:'';
+    position: absolute;
+  top: -3px;
+  left: -3px;
+  height: calc(100% + 6px);
+  width: calc(100% - 42px);
+  border-radius: 4px;
+    background: repeating-linear-gradient(45deg, #ededed, #ededed 5px, #f9f9f9 5px, #f9f9f9 10px);
+  }
+  
+  .card__back-logo {
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+  }
+  
+  .card__back-square {
+      position: absolute;
+      bottom: 15px;
+      left: 15px;
+  }
+  
+  .card:hover .card__front {
+      -webkit-transform: rotateY(180deg);
+      -moz-transform: rotateY(180deg);
+  
+  }
+  
+  .card:hover .card__back {
+      -webkit-transform: rotateY(0deg);
+      -moz-transform: rotateY(0deg);
+  }
+
+  .cardGold{
+    background-color: rgb(201, 173, 12)!important;
+  }
+  .cardTitanium{
+    background-color: rgba(0, 0, 0, 0.813)!important;
+  }
+  .cardSilver{
+    background-color: rgb(150, 141, 141)!important;
+  }
+  
+  .pcardholder{
+    width: 12rem;
+  }
+  .divdate{
+    width: 10rem;
+  }
+  .cardholder{
+    font-size: 1.2rem!important;
+  }
+  .dates{
+    font-size: 0.8rem!important;
+  }
+  .cardtype{
+    font-size: 1.5rem!important;
+  }
+
+  .imgarticle{
+    width: 30rem!important;
+  }
+  .card-body{
+    width: 38rem;
+  }
+  .imgilust{
+    width: 12rem;
+  }
+  .divimg{
+    width: 30rem;
+  }
+  .h1cards{
+    box-shadow: none;
+  }
+  .sectioncards1{
+    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+    border-radius: 10rem;
+  }
+
+  .borderh2{
+    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+    border-radius: 5rem;
+    padding: 1rem;
+  }
