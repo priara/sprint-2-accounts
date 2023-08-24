@@ -29,9 +29,7 @@ import javax.servlet.http.HttpSession;
 
                     .antMatchers(HttpMethod.GET,"/api/clients/current").hasAuthority("CLIENT")
 
-                    .antMatchers(HttpMethod.GET, "/clients").hasAuthority("ADMIN")
-
-                    .antMatchers("/manager.html").hasAuthority("ADMIN")
+                    .antMatchers("/manager.html", "/manager.js").hasAuthority("ADMIN")
 
                     .antMatchers("/web/account.html","/web/cards.html","/web/cards.js","/web/style.css","/web/accounts.html").hasAuthority("CLIENT")
 
