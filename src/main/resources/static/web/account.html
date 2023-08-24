@@ -15,7 +15,7 @@
 </head>
 
 <body>
-
+    <div id="app">
     <header
         class="d-flex flex-column justify-content-between  gap-3 align-items-center flex-md-row justify-content-md-around">
         <h2 class="p-1">Mindhub Brothers Bank</h2>
@@ -25,7 +25,7 @@
             <a class="text-primary " href="./cards.html">Cards <span class="ms-2">|</span></a>
             <a class="text-primary " href="">Loans <span class="ms-2">|</span></a>
             <a class="text-primary " href="">Transactions <span class="ms-2">|</span></a>
-            <img class="imgnav " src="./images/exit.png" alt="">
+            <button type="button" v-on:click="logout"><span><img class="imgnav " src="./images/exit.png" alt=""></span></button>
         </nav>
 
 
@@ -36,7 +36,7 @@
             <h1 class=" ms-2 fw-medium text-dark">Account Selected</h1>
         </section>
 
-        <div id="app"  class="d-flex flex-wrap justify-content-center align-items-center gap-5 mt-5">
+        <div  class="d-flex flex-wrap justify-content-center align-items-center gap-5 mt-5">
 
             <article class="article-wrapper col-10 col-md-4 gap-2">
                 <div class="project-info">
@@ -80,7 +80,7 @@
                 
             </section>
         </div>
-
+    </div>
         <div id="carouselExampleAutoplaying" class="carousel slide p-5" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">

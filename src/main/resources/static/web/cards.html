@@ -15,6 +15,8 @@
 </head>
 <body>
 
+<div id="app">
+
     <header
   class="d-flex flex-column justify-content-between  gap-3 align-items-center flex-md-row justify-content-md-around">
   <h2 class="p-1">Mindhub Brothers Bank</h2>
@@ -24,7 +26,7 @@
       <a class="anchorpaint text-primary " href="#">Cards <span class="ms-2">|</span></a>
       <a class="text-primary " href="">Loans <span class="ms-2">|</span></a>
       <a class="text-primary " href="">Transactions <span class="ms-2">|</span></a>
-      <img class="imgnav " src="./images/exit.png" alt="exit">
+      <button type="button" v-on:click="logout" class="button rounded-5 p-2"><span><img class="imgnav " src="./images/exit.png" alt=""></span></button>
   </nav>
 </header>
 
@@ -38,9 +40,10 @@
       </section>
         
 
-        <div id="app" class="d-flex flex-column align-items-center gap-5 p-5">
+        <div  class="d-flex flex-column align-items-center gap-5 p-5">
             <h3>CREDIT CARDS</h3>
-            <section class="d-flex flex-column flex-lg-row gap-5">
+
+            <section id="creditcardcontainer" class="d-flex flex-column flex-lg-row gap-5">
             <template v-for=" card of cardCredit" >
                 <div class="card" >
                   <div class="card__front card__part d-flex flex-column gap-2" v-bind:class="getCardColor(card)">
@@ -117,6 +120,7 @@
                   </template>
                 </section>
             </div>
+          </div>
         </section>
 
         <section class="sectiondivs d-flex flex-column align-items-center flex-lg-row justify-content-around gap-3 p-4">
@@ -161,6 +165,7 @@
     </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
         crossorigin="anonymous"></script>

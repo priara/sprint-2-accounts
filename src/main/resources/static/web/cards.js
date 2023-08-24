@@ -21,7 +21,7 @@ const options = {
 
     methods: {
         getCards(){
-            axios.get("http://localhost:8080/api/clients/1")
+            axios.get("http://localhost:8080/api/clients/current")
             .then(response => {
                     console.log(response);
                     this.cards = response.data.cards;
@@ -44,8 +44,29 @@ const options = {
             }
             return "";
         },
+            logout(){
+                axios.post("/api/logout")
+                .then(response => {
+                    console.log(response);
+                    window.location.href = "http://localhost:8080/web/index.html"
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'You closed your session',
+                        text: 'Until next time!',
+                        showConfirmButton: false,
+                      });
+                      setTimeout(() => {
+                        window.location.href = "http://localhost:8080/web/index.html"
+                      },1000)
+
+                }).catch(error => {
+                    console.log(error);
+                    
+                    
+                  });
+            }
+    }
         }
-}
 
 
 const app = createApp(options)

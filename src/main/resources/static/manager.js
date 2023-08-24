@@ -30,7 +30,7 @@ const options = {
                 email:this.email,
             }
             //enviar a la api un nuevo cliente
-            axios.post("http://localhost:8080/clients", client)
+            axios.get("http://localhost:8080/clients", client)
             .then(datos => {
                 this.clients.push(datos.data)
                 this.firstName= "",
@@ -38,6 +38,26 @@ const options = {
                 this.email= ""
             })
                 
+        },
+        logout(){
+            axios.post("/api/logout")
+            .then(response => {
+                console.log(response);
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'You closed your session',
+                    text: 'Until next time!',
+                    showConfirmButton: false,
+  
+                  });
+                  setTimeout(() => {
+                    window.location.href = "http://localhost:8080/web/index.html"
+                  },2000)
+                  
+            }).catch(error => {
+                console.log(error);
+              });
         }
 
 

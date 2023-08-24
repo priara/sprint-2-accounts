@@ -58,7 +58,11 @@ const options = {
             const options = { year: "numeric", month: "numeric", day: "numeric" , hour: '2-digit', minute: '2-digit' , second: '2-digit'};
             const formatted = new Date(date).toLocaleDateString(undefined, options);
             return formatted;
-        }
+        },
+        logout(){
+            
+            window.location.href="http://localhost:8080/web/index.html"
+    }
 
     }
 }

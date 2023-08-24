@@ -4,8 +4,9 @@ const options = {
     data() {
         return {
             response:[],
-            accounts: [],
+            client: [],
             loans:[],
+            accounts:[],
             formatter: new Intl.NumberFormat('en-US', {
                 style: 'currency',
                 currency: 'USD',
@@ -23,18 +24,38 @@ const options = {
 
     methods: {
         getAccountNumber(){
-            axios.get("http://localhost:8080/api/clients/1")
+            axios.get("http://localhost:8080/api/clients/current")
             .then(response => {
                     console.log(response);
-                this.accounts = response.data.accounts;
-                this.loans = response.data.loans;
+                this.client = response.data;
+                this.accounts = this.client.accounts;
+                this.loans = this.client.loans;
+                console.log(this.loans);
                 this.accounts.sort((a, b) => a.id - b.id);
                 this.loans.sort((a, b) => a.id - b.id);
-                
-
             })
             .catch((error) => console.log(error));
         },
+        logout(){
+            axios.post("/api/logout")
+            .then(response => {
+                console.log(response);
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'You closed your session',
+                    text: 'Until next time!',
+                    showConfirmButton: false,
+  
+                  });
+                  setTimeout(() => {
+                    window.location.href = "http://localhost:8080/web/index.html"
+                  },2000)
+                  
+            }).catch(error => {
+                console.log(error);
+              });
+        }
                 
         }
 

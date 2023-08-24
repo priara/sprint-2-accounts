@@ -1,26 +1,34 @@
 package com.mindhub.homebanking;
 
+import com.mindhub.homebanking.dto.ClientDTO;
 import com.mindhub.homebanking.models.*;
 import com.mindhub.homebanking.repositories.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import java.time.format.DateTimeFormatter;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.List;
 
 @SpringBootApplication
 public class HomebankingApplication {
 	LocalDate today = LocalDate.now();
+
 	LocalDate futureDate = today.plusYears(5);
+
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(HomebankingApplication.class, args);
 	}
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@Bean
 	public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository, LoanRepository loanRepository, ClientLoanRepository clientLoanRepository, CardRepository cardRepository) {
@@ -32,9 +40,13 @@ public class HomebankingApplication {
 			clientRepository.save(new Client("David", "Palmer", "david@gmail.com"));*/
 
 
-
-			Client melba = new Client("Melba", "morel", "melba@gmail.com");
+			Client melba = new Client("Melba", "Morel", "melba@gmail.com", passwordEncoder.encode("203560"));
 			clientRepository.save(melba);
+
+
+			Client adminClient = new Client("admin", "admin", "admin@gmail.com", passwordEncoder.encode("503020"));
+			clientRepository.save(adminClient);
+
 			Account accountMelba1 = new Account("VIN001", LocalDate.now(), 5000);
 			melba.addAccount(accountMelba1);
 			accountRepository.save(accountMelba1);
@@ -42,12 +54,15 @@ public class HomebankingApplication {
 			melba.addAccount(accountMelba2);
 			accountRepository.save(accountMelba2);
 
-			Client michelle = new Client("Michelle", "Dessler", "michelle@gmail.com");
+			Client michelle = new Client("Michelle", "Dessler", "michelle@gmail.com", passwordEncoder.encode("609586"));
 			clientRepository.save(michelle);
+
 			Account accountMichelle1 = new Account("VIN003",LocalDate.now(), 8500);
 			michelle.addAccount(accountMichelle1);
 			accountRepository.save(accountMichelle1);
+
 			Account accountMichelle2 = new Account("VIN004", this.today.plusDays(1), 3800);
+			michelle.addAccount(accountMichelle2);
 			accountRepository.save(accountMichelle2);
 
 			/*LOAN/PRESTAMOS*/
