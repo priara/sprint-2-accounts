@@ -28,11 +28,13 @@ import javax.servlet.http.HttpSession;
                     .antMatchers("/web/index.html", "/web/index.js","/web/styleindex.css","/web/images/**").permitAll()
                     /*.antMatchers: permite definir reglas de autorización específicas para diferentes rutas de tu aplicación web.*/
 
-                    .antMatchers(HttpMethod.POST,"/api/login", "/api/clients", "/api/logout").permitAll()
+                    .antMatchers(HttpMethod.POST,"/api/login", "/api/logout").permitAll()
 
                     .antMatchers(HttpMethod.GET,"/api/clients/current").hasAuthority("CLIENT")
 
                     .antMatchers(HttpMethod.POST,"/api/clients/current/cards").hasAuthority("CLIENT")
+
+                    .antMatchers(HttpMethod.GET, "/api/clients","/rest/clients").hasAuthority("ADMIN")
 
                     .antMatchers("/manager.html", "/manager.js").hasAuthority("ADMIN")
 
