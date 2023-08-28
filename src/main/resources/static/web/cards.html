@@ -41,12 +41,12 @@
         <img class="imgilust" src="./images/3588982-removebg-preview.png" alt="">
       </section>
         
-      <button v-if="cardsLength < 6" type="button" v-on:click="createCards" class="buttoncreate mt-3 p-2"> CREATE </button>
+
 
         <div  class="d-flex flex-column align-items-center gap-5 p-5">
             <h3>CREDIT CARDS</h3>
 
-            <section id="creditcardcontainer" class="d-flex flex-column flex-lg-row gap-5">
+            <section id="creditcardcontainer" class="d-flex flex-column justify-content-center flex-lg-row gap-5">
             <template v-for=" card of cardCredit" >
                 <div class="card" >
                   <div class="card__front card__part d-flex flex-column gap-2" v-bind:class="getCardColor(card)">
@@ -86,7 +86,7 @@
             
                 
                   <h3>DEBIT CARDS </h3>
-                  <section id="creditcardcontainer" class="d-flex flex-column flex-lg-row gap-5">
+                  <section id="creditcardcontainer" class="d-flex flex-column justify-content-center flex-lg-row gap-5">
                     <template v-for="card of cardDebit">
                       <div class="card" >
                         <div class="card__front card__part d-flex flex-column gap-2" v-bind:class="getCardColor(card)">
@@ -122,7 +122,9 @@
                       </div>
                   </template>
                 </section>
+                <button v-if="cardsLength < 6" type="button" v-on:click="createCards" class="buttoncreate mt-3 p-2"> CREATE CARD </button>
             </div>
+            
           </div>
         </section>
 
