@@ -45,19 +45,12 @@ public class WebAuthentication extends GlobalAuthenticationConfigurerAdapter {
                     return new User(client.getEmail(), client.getPassword(),
 
                             AuthorityUtils.createAuthorityList("CLIENT"));
-
                 }
-
             }
-
-
             else{
 
                 throw new UsernameNotFoundException("Unknown client: " + inputName);
 
             }
-
-
         });
-
     }}

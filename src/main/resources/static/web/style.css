@@ -52,10 +52,11 @@ main{
   background-color: #b4bce9!important;
 }
 .articleaccounts{
-  background-color: #b4bce9!important;
+  background-color: #fcfcfc!important;
 }
 .sectiondivs{
-  background-color: #b4bce9!important;
+  background-color: #fbfbfb!important;
+  
 }
 footer{
     min-height: 10vh;
@@ -415,7 +416,7 @@ td{
   .cardGold{
     background-color: rgb(201, 173, 12)!important;
   }
-  .cardTitanium{
+  .cardPlatinum{
     background-color: rgba(0, 0, 0, 0.813)!important;
   }
   .cardSilver{
@@ -468,3 +469,13 @@ td{
   .formulario{
     width: 50%;
   }
+.sectionaccounts{
+  width: 100%!important;
+}
+.buttoncreate{
+  border-radius: 2rem!important;
+  background-color: green!important;
+  color: white;
+  font-size: 1.2rem;
+  border: 2px solid rgb(0, 0, 0);
+}

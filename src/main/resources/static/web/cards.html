@@ -15,19 +15,21 @@
 </head>
 <body>
 
-<div id="app">
+<div id="app" v-cloak>
 
-    <header
-  class="d-flex flex-column justify-content-between  gap-3 align-items-center flex-md-row justify-content-md-around">
+  <header
+  class="d-flex flex-column justify-content-between  gap-3 align-items-center flex-lg-row justify-content-md-around">
   <h2 class="p-1">Mindhub Brothers Bank</h2>
-  <nav class="d-flex flex-wrap justify-content-center flex-sm-row align-items-center gap-2 flex-md-row gap-md-4">
-      <a class="text-primary " href="./accounts.html"><span><img class="imgnav me-2" src="./images/accounts.png"
-                  alt="accounts"></span>Accounts <span class="ms-2">|</span></a>
+  <nav class="d-flex flex-column justify-content-end flex-lg-row align-items-center gap-3 gap-md-4 m-2">
+      <a class=" text-primary " href="./accounts.html"><span><img class="imgnav me-2" src="./images/accounts.png"
+                  alt=""></span>Accounts <span class="ms-2">|</span></a>
       <a class="anchorpaint text-primary " href="#">Cards <span class="ms-2">|</span></a>
-      <a class="text-primary " href="">Loans <span class="ms-2">|</span></a>
-      <a class="text-primary " href="">Transactions <span class="ms-2">|</span></a>
+      <a class="text-primary " href="#">Loans <span class="ms-2">|</span></a>
+      <a class="text-primary " href="#">Transactions <span class="ms-2">|</span></a>
       <button type="button" v-on:click="logout" class="button rounded-5 p-2"><span><img class="imgnav " src="./images/exit.png" alt=""></span></button>
   </nav>
+
+
 </header>
 
 <main>
@@ -39,7 +41,7 @@
         <img class="imgilust" src="./images/3588982-removebg-preview.png" alt="">
       </section>
         
-      <button  type="button" v-on:click="createCards" class="mt-3 p-2"> CREATE </button>
+      <button v-if="cardsLength < 6" type="button" v-on:click="createCards" class="buttoncreate mt-3 p-2"> CREATE </button>
 
         <div  class="d-flex flex-column align-items-center gap-5 p-5">
             <h3>CREDIT CARDS</h3>
@@ -58,7 +60,7 @@
                     <p class="card_numer m-0">{{card.number}}</p>
                     <div class="divdate card__space-25 d-flex">
                       <p class="dates card__info">{{ card.formattedDate }} </p>
-                      <p class="dates card__info"> {{card.formattedFutureDate}}</p>
+                      <p class="dates card__info">- {{card.formattedFutureDate}}</p>
                     </div>
                     <div class="card__space-75">
                       <p class="cardholder card__info">{{card.cardholder}}</p>
@@ -84,7 +86,7 @@
             
                 
                   <h3>DEBIT CARDS </h3>
-                  <section >
+                  <section id="creditcardcontainer" class="d-flex flex-column flex-lg-row gap-5">
                     <template v-for="card of cardDebit">
                       <div class="card" >
                         <div class="card__front card__part d-flex flex-column gap-2" v-bind:class="getCardColor(card)">

@@ -68,6 +68,10 @@ public class CardsController {
             // Procede a crear una nueva tarjeta
             int cvv = generateCvv();
             String numberCard = (cardType == CardType.CREDIT) ? generateCreditNumber() : generateDebitNumber();
+            String formattedNumberCard = numberCard.substring(0, 4) + "-" +
+                    numberCard.substring(4, 8) + "-" +
+                    numberCard.substring(8, 12) + "-" +
+                    numberCard.substring(12);
             String cardHolder = client.getFirstName() + " " + client.getLastName();
             LocalDate today = LocalDate.now();
             LocalDate futureDate = today.plusYears(5);
@@ -75,7 +79,7 @@ public class CardsController {
             String formattedDate = today.format(formatter);
             String formattedFutureDate = futureDate.format(formatter);
 
-            Card newCard = new Card(cardHolder, cardType, cardColor, numberCard, cvv, formattedDate, formattedFutureDate);
+            Card newCard = new Card(cardHolder, cardType, cardColor, formattedNumberCard, cvv, formattedDate, formattedFutureDate);
             client.addCard(newCard);
             cardRepository.save(newCard);
             clientRepository.save(client);
@@ -83,31 +87,7 @@ public class CardsController {
             return new ResponseEntity<>("Card created successfully", HttpStatus.CREATED);
         }
 
-
-        /*if (cards.stream().filter(card -> card.getType() == cardType && card.getColor() == cardColor).count() >= 3) {
-            return new ResponseEntity<>("Maximum number of cards of this type reached", HttpStatus.FORBIDDEN);
-        }
-
-        int cvv = generateCvv();
-        String numberCard = (cardType == CardType.CREDIT) ? generateCreditNumber() : generateDebitNumber();
-        String cardHolder = client.getFirstName() + " " + client.getLastName();
-        LocalDate today = LocalDate.now();
-        LocalDate futureDate = today.plusYears(5);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/yyyy");
-        String formattedDate = today.format(formatter);
-        String formattedFutureDate = futureDate.format(formatter);
-
-        Card newCard = new Card(cardHolder, cardType, cardColor, numberCard, cvv, formattedDate, formattedFutureDate);
-        client.addCard(newCard);
-        cardRepository.save(newCard);
-        clientRepository.save(client);
-
-        return new ResponseEntity<>("Card created successfully", HttpStatus.CREATED);*/
-
-
     }
-
-
 
         public static int generateCvv () {
             Random random = new Random();
@@ -117,7 +97,7 @@ public class CardsController {
 
         public static String generateCreditNumber () {
             SecureRandom random = new SecureRandom();
-            BigInteger maxLimit = new BigInteger("1000000000000000");
+            BigInteger maxLimit = new BigInteger("10000000000000000");
             BigInteger randomNumber = new BigInteger(maxLimit.bitLength(), random);
 
             // Asegúrate de que el número generado sea menor que el límite máximo
@@ -130,7 +110,7 @@ public class CardsController {
 
         public static String generateDebitNumber () {
             SecureRandom random = new SecureRandom();
-            BigInteger maxLimit = new BigInteger("1000000000000000");
+            BigInteger maxLimit = new BigInteger("10000000000000000");
             BigInteger randomNumber = new BigInteger(maxLimit.bitLength(), random);
 
             // Asegúrate de que el número generado sea menor que el límite máximo

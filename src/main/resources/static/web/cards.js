@@ -6,10 +6,11 @@ const options = {
             response:[],
             cards : [],
             cardGold:"GOLD",
-            cardTitanium:"TITANIUM",
+            cardTitanium:"PLATINUM",
             cardSilver:"SILVER",
             cardCredit:"CREDIT",
             cardDebit:"DEBIT",
+            cardsLength: 0,
 
         }
     },
@@ -31,6 +32,8 @@ const options = {
                     console.log(this.cardCredit);
                     this.cardDebit = this.cards.filter((card => card.type === "DEBIT"))
                     console.log(this.cardDebit);
+                    this.cardsLength = this.cards.length;
+                    console.log(this.cardsLength);
             })
             .catch((error) => console.log(error));
         },
@@ -38,7 +41,7 @@ const options = {
             if (card.color === this.cardGold) {
                 return "cardGold";
             } else if (card.color === this.cardTitanium) {
-                return "cardTitanium";
+                return "cardPlatinum";
             }else if (card.color === this.cardSilver){
                 return "cardSilver";
             }
@@ -48,7 +51,6 @@ const options = {
                 axios.post("/api/logout")
                 .then(response => {
                     console.log(response);
-                    window.location.href = "http://localhost:8080/web/index.html"
                     Swal.fire({
                         icon: 'success',
                         title: 'You closed your session',

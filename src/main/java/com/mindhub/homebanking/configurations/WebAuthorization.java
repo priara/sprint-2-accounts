@@ -25,7 +25,7 @@ import javax.servlet.http.HttpSession;
             /*Cuando utilizas http.authorizeRequests(),
             estás configurando reglas de autorización para diferentes rutas o URLs en tu aplicación*/
 
-                    .antMatchers("/web/index.html").permitAll()
+                    .antMatchers("/web/index.html", "/web/index.js","/web/styleindex.css","/web/images/**").permitAll()
                     /*.antMatchers: permite definir reglas de autorización específicas para diferentes rutas de tu aplicación web.*/
 
                     .antMatchers(HttpMethod.POST,"/api/login", "/api/clients", "/api/logout").permitAll()
@@ -38,6 +38,7 @@ import javax.servlet.http.HttpSession;
 
                     .antMatchers("/web/account.html","/web/cards.html","/web/cards.js","/web/style.css","/web/accounts.html", "/web/create-cards.html","/web/create-cards.js").hasAuthority("CLIENT")
 
+                    /*.anyRequest().denyAll()*/
             ;
 
 
