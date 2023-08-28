@@ -47,21 +47,22 @@ public class HomebankingApplication {
 			Client adminClient = new Client("admin", "admin", "admin@gmail.com", passwordEncoder.encode("503020"));
 			clientRepository.save(adminClient);
 
-			Account accountMelba1 = new Account("VIN001", LocalDate.now(), 5000);
+			Account accountMelba1 = new Account("VIN-001", LocalDate.now(), 5000);
 			melba.addAccount(accountMelba1);
 			accountRepository.save(accountMelba1);
-			Account accountMelba2 = new Account("VIN002", this.today.plusDays(1), 7500);
+
+			Account accountMelba2 = new Account("VIN-002", this.today.plusDays(1), 7500);
 			melba.addAccount(accountMelba2);
 			accountRepository.save(accountMelba2);
 
 			Client michelle = new Client("Michelle", "Dessler", "michelle@gmail.com", passwordEncoder.encode("609586"));
 			clientRepository.save(michelle);
 
-			Account accountMichelle1 = new Account("VIN003",LocalDate.now(), 8500);
+			Account accountMichelle1 = new Account("VIN-003",LocalDate.now(), 8500);
 			michelle.addAccount(accountMichelle1);
 			accountRepository.save(accountMichelle1);
 
-			Account accountMichelle2 = new Account("VIN004", this.today.plusDays(1), 3800);
+			Account accountMichelle2 = new Account("VIN-004", this.today.plusDays(1), 3800);
 			michelle.addAccount(accountMichelle2);
 			accountRepository.save(accountMichelle2);
 
@@ -107,7 +108,7 @@ public class HomebankingApplication {
 			melba.addCard(melbaCard1);
 			cardRepository.save(melbaCard1);
 
-			Card melbaCard2 = new Card("Melba " + "Morel",CardType.CREDIT , CardColor.TITANIUM, "4080-3055-7894-9010" , 412 , formattedDate , formattedFutureDate );
+			Card melbaCard2 = new Card("Melba " + "Morel",CardType.CREDIT , CardColor.PLATINUM, "4080-3055-7894-9010" , 412 , formattedDate , formattedFutureDate );
 			melba.addCard(melbaCard2);
 			cardRepository.save(melbaCard2);
 

@@ -12,6 +12,7 @@ const options = {
                 currency: 'USD',
                 minimumFractionDigits: 0
             }),
+            accountsLength: 0,
 
         }
     },
@@ -19,6 +20,7 @@ const options = {
     created() {
             
             this.getAccountNumber();
+            
         },
         
 
@@ -33,6 +35,8 @@ const options = {
                 console.log(this.loans);
                 this.accounts.sort((a, b) => a.id - b.id);
                 this.loans.sort((a, b) => a.id - b.id);
+                this.accountsLength = this.accounts.length;
+                console.log(this.accountsLength);
             })
             .catch((error) => console.log(error));
         },
@@ -55,6 +59,26 @@ const options = {
             }).catch(error => {
                 console.log(error);
               });
+        },
+        createAccount(){
+            axios.post("/api/clients/current/accounts")
+            .then(response => {
+                console.log(response);
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Account created successfully',
+  
+                  }).then(() => {
+                    // Recarga la página después de mostrar la notificación
+                    location.reload();
+                });
+                  setTimeout(() => {
+                    window.location.href = "http://localhost:8080/web/accounts.html"
+                  },2000)
+
+
+            }).catch((error) => console.log(error));
         }
                 
         }

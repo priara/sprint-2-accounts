@@ -120,11 +120,6 @@ public class Client {
         this.email = email;
     }
 
-    public void setAccounts( Account account) {
-        account.setClient(this);
-        accounts.add(account);
-    }
-
     public String getPassword() {
         return password;
     }

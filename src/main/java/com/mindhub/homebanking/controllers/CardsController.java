@@ -1,0 +1,150 @@
+package com.mindhub.homebanking.controllers;
+
+import com.mindhub.homebanking.dto.ClientDTO;
+import com.mindhub.homebanking.models.*;
+import com.mindhub.homebanking.repositories.AccountRepository;
+import com.mindhub.homebanking.repositories.CardRepository;
+import com.mindhub.homebanking.repositories.ClientRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.math.BigInteger;
+import java.security.SecureRandom;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static com.mindhub.homebanking.models.CardColor.*;
+import static com.mindhub.homebanking.models.CardType.CREDIT;
+import static com.mindhub.homebanking.models.CardType.DEBIT;
+
+@RestController
+public class CardsController {
+
+    @Autowired
+    private AccountRepository accountRepository;
+
+    @Autowired
+    private ClientRepository clientRepository;
+
+    @Autowired
+    private CardRepository cardRepository;
+
+    @RequestMapping(path = "/api/clients/current/cards", method = RequestMethod.POST)
+    public ResponseEntity<Object> createCards(
+
+            @RequestParam String color, @RequestParam String type, Authentication authentication) {
+
+        if (authentication == null) {
+            return new ResponseEntity<>("Unauthorized", HttpStatus.UNAUTHORIZED);
+        }
+
+        Client client = clientRepository.findByEmail(authentication.getName());
+        Set<Card> cards = client.getCards();
+
+        if (cards.size() >= 6) {
+            return new ResponseEntity<>("Maximum cards reached", HttpStatus.FORBIDDEN);
+        }
+
+        CardType cardType = CardType.valueOf(type);
+
+        CardColor cardColor = CardColor.valueOf(color);
+
+        // Antes de crear una nueva tarjeta
+        boolean cardExists = client.getCards().stream()
+                .anyMatch(card -> card.getType() == cardType && card.getColor() == cardColor);
+
+        if (cardExists) {
+            return new ResponseEntity<>("You already have a card with this type and color", HttpStatus.FORBIDDEN);
+        } else {
+            // Procede a crear una nueva tarjeta
+            int cvv = generateCvv();
+            String numberCard = (cardType == CardType.CREDIT) ? generateCreditNumber() : generateDebitNumber();
+            String cardHolder = client.getFirstName() + " " + client.getLastName();
+            LocalDate today = LocalDate.now();
+            LocalDate futureDate = today.plusYears(5);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/yyyy");
+            String formattedDate = today.format(formatter);
+            String formattedFutureDate = futureDate.format(formatter);
+
+            Card newCard = new Card(cardHolder, cardType, cardColor, numberCard, cvv, formattedDate, formattedFutureDate);
+            client.addCard(newCard);
+            cardRepository.save(newCard);
+            clientRepository.save(client);
+
+            return new ResponseEntity<>("Card created successfully", HttpStatus.CREATED);
+        }
+
+
+        /*if (cards.stream().filter(card -> card.getType() == cardType && card.getColor() == cardColor).count() >= 3) {
+            return new ResponseEntity<>("Maximum number of cards of this type reached", HttpStatus.FORBIDDEN);
+        }
+
+        int cvv = generateCvv();
+        String numberCard = (cardType == CardType.CREDIT) ? generateCreditNumber() : generateDebitNumber();
+        String cardHolder = client.getFirstName() + " " + client.getLastName();
+        LocalDate today = LocalDate.now();
+        LocalDate futureDate = today.plusYears(5);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/yyyy");
+        String formattedDate = today.format(formatter);
+        String formattedFutureDate = futureDate.format(formatter);
+
+        Card newCard = new Card(cardHolder, cardType, cardColor, numberCard, cvv, formattedDate, formattedFutureDate);
+        client.addCard(newCard);
+        cardRepository.save(newCard);
+        clientRepository.save(client);
+
+        return new ResponseEntity<>("Card created successfully", HttpStatus.CREATED);*/
+
+
+    }
+
+
+
+        public static int generateCvv () {
+            Random random = new Random();
+            int randomNumber = random.nextInt(999);
+            return randomNumber;
+        }
+
+        public static String generateCreditNumber () {
+            SecureRandom random = new SecureRandom();
+            BigInteger maxLimit = new BigInteger("1000000000000000");
+            BigInteger randomNumber = new BigInteger(maxLimit.bitLength(), random);
+
+            // Asegúrate de que el número generado sea menor que el límite máximo
+            while (randomNumber.compareTo(maxLimit) >= 0) {
+                randomNumber = new BigInteger(maxLimit.bitLength(), random);
+            }
+
+            return randomNumber.toString();
+        }
+
+        public static String generateDebitNumber () {
+            SecureRandom random = new SecureRandom();
+            BigInteger maxLimit = new BigInteger("1000000000000000");
+            BigInteger randomNumber = new BigInteger(maxLimit.bitLength(), random);
+
+            // Asegúrate de que el número generado sea menor que el límite máximo
+            while (randomNumber.compareTo(maxLimit) >= 0) {
+                randomNumber = new BigInteger(maxLimit.bitLength(), random);
+            }
+
+            return randomNumber.toString();
+        }
+
+
+
+
+    }
+
+
+

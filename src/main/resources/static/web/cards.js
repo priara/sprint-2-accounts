@@ -64,6 +64,9 @@ const options = {
                     
                     
                   });
+            },
+            createCards(){
+                window.location.href = "http://localhost:8080/web/create-cards.html"
             }
     }
         }
