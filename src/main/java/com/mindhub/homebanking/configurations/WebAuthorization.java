@@ -14,39 +14,34 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@EnableWebSecurity  /*estoy indicando a Spring Security que active sus características de seguridad web a la clase WebAuthorization*/
-    @Configuration /*indicamos a Spring que una clase contiene información de configuración de beans*/
+@EnableWebSecurity
+    @Configuration
     class WebAuthorization  {
 
         @Bean
         public SecurityFilterChain filterChain (HttpSecurity http) throws Exception {
 
             http.authorizeRequests()
-            /*Cuando utilizas http.authorizeRequests(),
-            estás configurando reglas de autorización para diferentes rutas o URLs en tu aplicación*/
 
                     .antMatchers("/web/index.html", "/web/index.js","/web/styleindex.css","/web/images/**").permitAll()
-                    /*.antMatchers: permite definir reglas de autorización específicas para diferentes rutas de tu aplicación web.*/
 
                     .antMatchers(HttpMethod.POST,"/api/login", "/api/logout").permitAll()
 
                     .antMatchers(HttpMethod.GET,"/api/clients/current").hasAuthority("CLIENT")
 
-                    .antMatchers(HttpMethod.POST,"/api/clients/current/cards").hasAuthority("CLIENT")
+                    .antMatchers(HttpMethod.POST,"/api/clients/current/cards","/api/transactions").hasAuthority("CLIENT")
 
                     .antMatchers(HttpMethod.GET, "/api/clients","/rest/clients").hasAuthority("ADMIN")
 
                     .antMatchers("/manager.html", "/manager.js").hasAuthority("ADMIN")
 
-                    .antMatchers("/web/account.html","/web/cards.html","/web/cards.js","/web/style.css","/web/accounts.html", "/web/create-cards.html","/web/create-cards.js").hasAuthority("CLIENT")
+                    .antMatchers("/web/account.html","/web/cards.html","/web/cards.js","/web/style.css","/web/accounts.html", "/web/create-cards.html","/web/create-cards.js","/web/transfers.html", "/web/transfers.js").hasAuthority("CLIENT")
 
                     /*.anyRequest().denyAll()*/
             ;
 
 
             http.formLogin()
-                /*se utiliza comúnmente cuando deseas proporcionar a los usuarios
-                un formulario de inicio de sesión personalizado*/
 
                     .usernameParameter("email")
 
@@ -56,14 +51,10 @@ import javax.servlet.http.HttpSession;
 
 
             http.logout().logoutUrl("/api/logout");
-            /*esta configuración establece la URL de cierre de sesión a /api/logout.*/
 
             // turn off checking for CSRF tokens
 
             http.csrf().disable();
-            /*se utiliza en Spring Security para deshabilitar la protección CSRF (Cross-Site Request Forgery) en tu aplicación web.*/
-            /*CSRF es un tipo de ataque en el que un atacante engaña a un usuario
-            para que realice una acción no deseada en una aplicación en la que el usuario está autenticado.*/
 
             //disabling frameOptions so h2-console can be accessed
 

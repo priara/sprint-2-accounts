@@ -52,6 +52,7 @@ public class AccountController {
     public ResponseEntity<Object> createAccount(Authentication authentication) {
 
         if (authentication != null) { /*si hay un cliente autenticado entra en la condicion*/
+
             Client client = clientRepository.findByEmail(authentication.getName());
             /*creo una variable y busco al cliente autenticado por el mail*/
             Set<Account> accounts = client.getAccounts();

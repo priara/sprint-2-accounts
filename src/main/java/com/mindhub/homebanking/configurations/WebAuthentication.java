@@ -33,7 +33,7 @@ public class WebAuthentication extends GlobalAuthenticationConfigurerAdapter {
     public void init(AuthenticationManagerBuilder auth) throws Exception {
 
         auth.userDetailsService(inputName -> {
-
+            /*auth es un objeto que se utiliza para configurar cómo se autentican los usuarios en la aplicación.*/
             Client client = clientRepository.findByEmail(inputName);
 
             if (client != null) {

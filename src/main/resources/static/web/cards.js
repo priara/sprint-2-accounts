@@ -53,7 +53,7 @@ const options = {
                     console.log(response);
                     Swal.fire({
                         icon: 'success',
-                        title: 'You closed your session',
+                        text: 'You closed your session',
                         text: 'Until next time!',
                         showConfirmButton: false,
                       });

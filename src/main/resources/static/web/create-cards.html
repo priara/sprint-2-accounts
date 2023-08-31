@@ -18,19 +18,22 @@
     <div id="app" v-cloak>
 
       <header
-      class="d-flex flex-column justify-content-between  gap-3 align-items-center flex-lg-row justify-content-md-around">
-      <h2 class="p-1">Mindhub Brothers Bank</h2>
-      <nav class="d-flex flex-column justify-content-end flex-lg-row align-items-center gap-3 gap-md-4 m-2">
-          <a class=" text-primary " href="./accounts.html"><span><img class="imgnav me-2" src="./images/accounts.png"
-                      alt=""></span>Accounts <span class="ms-2">|</span></a>
-          <a class="anchorpaint text-primary " href="./cards.html">Cards <span class="ms-2">|</span></a>
-          <a class="text-primary " href="#">Loans <span class="ms-2">|</span></a>
-          <a class="text-primary " href="#">Transactions <span class="ms-2">|</span></a>
-          <button type="button" v-on:click="logout" class="button rounded-5 p-2"><span><img class="imgnav " src="./images/exit.png" alt=""></span></button>
-      </nav>
-    
-    
-    </header>
+    class="d-flex flex-column justify-content-between  gap-3 align-items-center flex-lg-row justify-content-md-around">
+    <div class="d-flex flex-column flex-lg-row align-items-center">
+        <h2 class="">Mindhub Brothers Bank</h2>
+        <img class="imgicon" src="./images/banco.png" alt="">
+    </div>
+    <nav class="d-flex flex-column justify-content-end flex-lg-row align-items-center gap-3 gap-md-4 m-2">
+        <a class=" anchors" href="./accounts.html"><span></span>Accounts <span class="ms-2">|</span></a>
+        <a class=" anchorfav" href="./cards.html">Cards <span class="ms-2">|</span></a>
+        <a class="anchors" href="#">Loans <span class="ms-2">|</span></a>
+        <a class="anchors text-info" href="./transfers.html">Transactions <span class="ms-2">|</span></a>
+        <button type="button" v-on:click="logout" class="button rounded-5 p-2"><span><img class="imgnav "
+                    src="./images/exit.png" alt=""></span></button>
+    </nav>
+
+
+</header>
 
     <main class="d-flex flex-column justify-content-center align-items-center"> 
 
@@ -76,12 +79,13 @@
     
 
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue@3.3.4/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./create-cards.js"></script>
 </body>
 </html>

@@ -4,50 +4,65 @@ const options = {
     data() {
         return {
             response:[],
-            cards : [],
-            cardType:["CREDIT", "DEBIT"],
-            cardColor:["GOLD", "SILVER","PLATINUM"],
-            selectedCardType: "", 
-            selectedCardColor: "",
-            
-
+            accounts:[],
+            transactions:[],
+            selectedForm: 'form1',
+            selectedAmount:"",
+            selectedDescription:"",
+            selectedNumberOrigin:"",
+            selectedNumberDestiny:"",
         }
     },
 
     created() {
+            this.getAccounts();
+        },
         
-
-    },
+        
     methods: {
-        createCards(){
+            getAccounts(){
+                axios.get("http://localhost:8080/api/clients/current")
+                .then(response => {
+                    this.client = response.data;
+                    this.accounts = this.client.accounts.sort((a,b) => a.id - b.id);
+                    console.log(this.accounts);
+
+
+
+                    // HACER CARTEL PARA QUE NO ME DEJE HACER TRANSFER A LA MISMA CUENTA
+                })
+                .catch((error) => console.log(error));
+            },
+        createTransactions(){
             Swal.fire({
                 icon: 'question',
-                text: '¿Are you sure you want to create a card ' + this.selectedCardType + ' ' + this.selectedCardColor + '?',
+                text: '¿Are you sure you want to create a transaction? ',
                 showCancelButton: true,
                 confirmButtonText: 'Yes',
-                cancelButtonText: 'No'
+                cancelButtonText: 'No',
               }).then((result) => {
                 if (result.isConfirmed) {
-                  // El usuario hizo clic en "Sí", procede a crear la tarjeta
-                  axios.post("/api/clients/current/cards", `type=${this.selectedCardType}&color=${this.selectedCardColor}`)
+                    
+                  axios.post("/api/transactions", `amount=${this.selectedAmount}&description=${this.selectedDescription}&numberOrigin=${this.selectedNumberOrigin}&numberDestiny=${this.selectedNumberDestiny}`)
                   .then(response => {
                     console.log(response);
-                    this.cards = response.data.cards;
-                    console.log(this.cards);
+                    this.transactions = response.data.transactions;
+                    console.log(this.transactions);
             
                     Swal.fire({
                       icon: 'success',
-                      text: 'You have requested a new card',
+                      text: 'You have requested a new transaction',
                       showConfirmButton: false,
                     });
                     setTimeout(() => {
-                      window.location.href = "http://localhost:8080/web/cards.html"
+                        window.location.href = "http://localhost:8080/web/transfers.html"
                     }, 1000)
                   })
                   .catch((error) => {
+                    console.log(error);
                     Swal.fire({
                       icon: 'error',
-                      text: 'You already have a card with this type and color',
+                      text: 'Cannot transfer to the same account',
                       showConfirmButton: false,
                     });
                     setTimeout(() => {
@@ -65,6 +80,7 @@ const options = {
                 }
               });
         },
+        
         logout() {
             axios.post("/api/logout")
                 .then(response => {
@@ -87,8 +103,7 @@ const options = {
         },
         
         },
-            
-            
+        
     }
         
 

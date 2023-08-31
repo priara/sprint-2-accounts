@@ -41,22 +41,30 @@ public class CardsController {
     @RequestMapping(path = "/api/clients/current/cards", method = RequestMethod.POST)
     public ResponseEntity<Object> createCards(
 
-            @RequestParam String color, @RequestParam String type, Authentication authentication) {
+            @RequestParam CardColor color, @RequestParam CardType type, Authentication authentication) {
 
         if (authentication == null) {
             return new ResponseEntity<>("Unauthorized", HttpStatus.UNAUTHORIZED);
         }
 
         Client client = clientRepository.findByEmail(authentication.getName());
+
         Set<Card> cards = client.getCards();
 
         if (cards.size() >= 6) {
             return new ResponseEntity<>("Maximum cards reached", HttpStatus.FORBIDDEN);
         }
 
-        CardType cardType = CardType.valueOf(type);
+        if (type != DEBIT && type != CREDIT){
+            return new ResponseEntity<>("does not match any type", HttpStatus.FORBIDDEN);
+        }
+        CardType cardType = type;
 
-        CardColor cardColor = CardColor.valueOf(color);
+        if (color != GOLD && color != PLATINUM && color != SILVER){
+            return new ResponseEntity<>("does not match any colorr", HttpStatus.FORBIDDEN);
+        }
+        CardColor cardColor = color;
+
 
         // Antes de crear una nueva tarjeta
         boolean cardExists = client.getCards().stream()
@@ -65,7 +73,7 @@ public class CardsController {
         if (cardExists) {
             return new ResponseEntity<>("You already have a card with this type and color", HttpStatus.FORBIDDEN);
         } else {
-            // Procede a crear una nueva tarjeta
+            // creo una nueva tarjeta
             int cvv = generateCvv();
             String numberCard = (cardType == CardType.CREDIT) ? generateCreditNumber() : generateDebitNumber();
             String formattedNumberCard = numberCard.substring(0, 4) + "-" +
@@ -100,7 +108,7 @@ public class CardsController {
             BigInteger maxLimit = new BigInteger("10000000000000000");
             BigInteger randomNumber = new BigInteger(maxLimit.bitLength(), random);
 
-            // Asegúrate de que el número generado sea menor que el límite máximo
+            // me aseguro de que el número generado sea menor que el límite máximo
             while (randomNumber.compareTo(maxLimit) >= 0) {
                 randomNumber = new BigInteger(maxLimit.bitLength(), random);
             }
@@ -113,7 +121,7 @@ public class CardsController {
             BigInteger maxLimit = new BigInteger("10000000000000000");
             BigInteger randomNumber = new BigInteger(maxLimit.bitLength(), random);
 
-            // Asegúrate de que el número generado sea menor que el límite máximo
+            // me aseguro de que el número generado sea menor que el límite máximo
             while (randomNumber.compareTo(maxLimit) >= 0) {
                 randomNumber = new BigInteger(maxLimit.bitLength(), random);
             }

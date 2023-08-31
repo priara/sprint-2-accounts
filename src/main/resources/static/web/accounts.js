@@ -40,29 +40,9 @@ const options = {
                 })
                 .catch((error) => console.log(error));
         },
-        logout() {
-            axios.post("/api/logout")
-                .then(response => {
-                    console.log(response);
-
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'You closed your session',
-                        text: 'Until next time!',
-                        showConfirmButton: false,
-
-                    });
-                    setTimeout(() => {
-                        window.location.href = "http://localhost:8080/web/index.html"
-                    }, 2000)
-
-                }).catch(error => {
-                    console.log(error);
-                });
-        },
         createAccount() {
             Swal.fire({
-                title: '¿Are you sure you want to create an account?',
+                text: '¿Are you sure you want to create an account?',
                 icon: 'question',
                 showCancelButton: true,
                 confirmButtonText: 'Yes',
@@ -76,7 +56,7 @@ const options = {
 
                             Swal.fire({
                                 icon: 'success',
-                                title: 'Account created successfully',
+                                text: 'Account created successfully',
                             }).then(() => {
                                 // Recarga la página después de mostrar la notificación
                                 location.reload();
@@ -89,13 +69,33 @@ const options = {
                     // El usuario hizo clic en "No" o cerró el cuadro de diálogo
                     Swal.fire({
                         icon: 'info',
-                        title: 'Operation cancelled',
+                        text: 'Operation cancelled',
                         showConfirmButton: false,
                         timer: 1000
                     });
                 }
             });
-        }
+        },
+        logout() {
+            axios.post("/api/logout")
+                .then(response => {
+                    console.log(response);
+
+                    Swal.fire({
+                        icon: 'success',
+                        text: 'You closed your session',
+                        text: 'Until next time!',
+                        showConfirmButton: false,
+
+                    });
+                    setTimeout(() => {
+                        window.location.href = "http://localhost:8080/web/index.html"
+                    }, 2000)
+
+                }).catch(error => {
+                    console.log(error);
+                });
+        },
 
     }
 }

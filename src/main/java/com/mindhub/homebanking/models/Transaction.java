@@ -11,10 +11,13 @@ public class Transaction {
     private Long id;
 
     private TransactionType type;
+
     private double amount;
+
     private LocalDateTime date;
 
     private String description;
+
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;

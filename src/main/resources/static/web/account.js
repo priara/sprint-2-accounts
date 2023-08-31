@@ -59,13 +59,29 @@ const options = {
             const formatted = new Date(date).toLocaleDateString(undefined, options);
             return formatted;
         },
-        logout(){
-            
-            window.location.href="http://localhost:8080/web/index.html"
+        logout() {
+            axios.post("/api/logout")
+                .then(response => {
+                    console.log(response);
+
+                    Swal.fire({
+                        icon: 'success',
+                        text: 'You closed your session',
+                        text: 'Until next time!',
+                        showConfirmButton: false,
+
+                    });
+                    setTimeout(() => {
+                        window.location.href = "http://localhost:8080/web/index.html"
+                    }, 2000)
+
+                }).catch(error => {
+                    console.log(error);
+                });
+        },
     }
 
     }
-}
 
 
 const app = createApp(options)
