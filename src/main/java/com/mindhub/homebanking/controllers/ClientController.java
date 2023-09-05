@@ -5,6 +5,8 @@ import com.mindhub.homebanking.models.Account;
 import com.mindhub.homebanking.models.Client;
 import com.mindhub.homebanking.repositories.AccountRepository;
 import com.mindhub.homebanking.repositories.ClientRepository;
+import com.mindhub.homebanking.services.AccountService;
+import com.mindhub.homebanking.services.ClientService;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,26 +25,25 @@ import static java.util.stream.Collectors.toList;
 public class ClientController {
 
     @Autowired
-    private ClientRepository clientRepository;
+    private ClientService clientService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private AccountRepository accountRepository;
+    private AccountService accountService;
 
     @RequestMapping("/api/clients")
     public List<ClientDTO> getClients() {
-        return clientRepository.findAll().stream().map(ClientDTO::new).collect(toList());
+        return clientService.getClientsDTO();
 
     }
 
     @RequestMapping(path = "/api/clients/current", method = RequestMethod.GET)
     public ClientDTO getClientCurrent(Authentication authentication) {
 
-        Client client = clientRepository.findByEmail(authentication.getName());
 
-        ClientDTO clientDTO = new ClientDTO(client);
+        ClientDTO clientDTO = clientService.getClientDTO(authentication.getName());
 
         return clientDTO;
 
@@ -52,7 +53,7 @@ public class ClientController {
 
     @RequestMapping("/api/clients/{id}")
     public ClientDTO getClient(@PathVariable Long id){
-        return new ClientDTO(clientRepository.findById(id).orElse(null));
+        return clientService.findById(id);
 
 
     }
@@ -69,24 +70,27 @@ public class ClientController {
 
         }
 
-        if (clientRepository.findByEmail(email) !=  null) {
+        if (clientService.findByEmail(email) !=  null) {
 
 
             return new ResponseEntity<>("Name already in use", HttpStatus.FORBIDDEN);
 
         }
 
-        clientRepository.save(new Client(firstName, lastName, email, passwordEncoder.encode(password)));
+        Client newClient = new Client(firstName, lastName, email, passwordEncoder.encode(password));
+
 
         String numeroAleatorio = "VIN-" + generateRandomNumber(); /*genera un número aleatorio único*/
-        while(accountRepository.findByNumber(numeroAleatorio) != null){
+        while(accountService.findByNumber(numeroAleatorio) != null){
             numeroAleatorio = generateRandomNumber();
         }
+
         Account account = new Account(numeroAleatorio, LocalDate.now(), 0);
-        Client client = clientRepository.findByEmail(email);
-        client.addAccount(account);
-        accountRepository.save(account);
-        clientRepository.save(client);
+
+
+        accountService.addAccount(account);
+        newClient.addAccount(account);
+        clientService.saveClient(newClient);
 
         return new ResponseEntity<>(HttpStatus.CREATED);
 

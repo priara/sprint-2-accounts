@@ -6,6 +6,8 @@ import com.mindhub.homebanking.models.Account;
 import com.mindhub.homebanking.models.Client;
 import com.mindhub.homebanking.repositories.AccountRepository;
 import com.mindhub.homebanking.repositories.ClientRepository;
+import com.mindhub.homebanking.services.AccountService;
+import com.mindhub.homebanking.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,21 +28,22 @@ import static java.util.stream.Collectors.toList;
 @RestController
 public class AccountController {
 
-    @Autowired
-    private AccountRepository accountRepository;
 
     @Autowired
-    private ClientRepository clientRepository;
+    private AccountService accountService;
+
+    @Autowired
+    private ClientService clientService;
 
     @RequestMapping("/api/accounts")
     public List<AccountDTO> getAccounts() {
-        return accountRepository.findAll().stream().map(AccountDTO::new).collect(toList());
+        return accountService.getAccounts();
 
     }
 
     @RequestMapping("/api/accounts/{id}")
     public AccountDTO getAccounts(@PathVariable Long id) {
-        return new AccountDTO(accountRepository.findById(id).orElse(null));
+        return accountService.findById(id);
 
 
     }
@@ -53,20 +56,20 @@ public class AccountController {
 
         if (authentication != null) { /*si hay un cliente autenticado entra en la condicion*/
 
-            Client client = clientRepository.findByEmail(authentication.getName());
+            Client client = clientService.findByEmail(authentication.getName());
             /*creo una variable y busco al cliente autenticado por el mail*/
             Set<Account> accounts = client.getAccounts();
 
             if (accounts.size() < 3) {
                 String numeroAleatorio = "VIN-" + generateRandomNumber(); /*genere un numero aleatorio*/
-                while(accountRepository.findByNumber(numeroAleatorio) !=null){ /*busque en la base de datos por el numero con numero aleatorio*/
+                while(accountService.findByNumber(numeroAleatorio) !=null){ /*busque en la base de datos por el numero con numero aleatorio*/
                     numeroAleatorio = generateRandomNumber(); /*en caso de que ya exista un numero asociado a una cuenta, generamos otro numero aleatorio*/
                 }
                 Account account = new Account(numeroAleatorio, LocalDate.now(), 0);
                 /*cree una cuenta nueva y se le asigno al cliente*/
                 client.addAccount(account);
-                accountRepository.save(account);
-                clientRepository.save(client); /*si yo no guardo la cuenta al cliente, no se va a ver en la base de datos*/
+                accountService.addAccount(account);
+                clientService.saveClient(client); /*si yo no guardo la cuenta al cliente, no se va a ver en la base de datos*/
 
 
                 return new ResponseEntity<>("Account created successfully", HttpStatus.CREATED);

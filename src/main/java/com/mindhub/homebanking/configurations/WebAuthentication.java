@@ -27,8 +27,6 @@ public class WebAuthentication extends GlobalAuthenticationConfigurerAdapter {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
     }
-
-
     @Override
     public void init(AuthenticationManagerBuilder auth) throws Exception {
 

@@ -7,10 +7,10 @@ import java.util.List;
 
 @Entity
 public class ClientLoan {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
-
     private long id;
 
     private double amount;

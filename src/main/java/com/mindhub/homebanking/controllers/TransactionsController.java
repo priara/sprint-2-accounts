@@ -1,12 +1,12 @@
 package com.mindhub.homebanking.controllers;
 
-import com.mindhub.homebanking.models.Account;
-import com.mindhub.homebanking.models.Client;
-import com.mindhub.homebanking.models.Transaction;
-import com.mindhub.homebanking.models.TransactionType;
+import com.mindhub.homebanking.models.*;
 import com.mindhub.homebanking.repositories.AccountRepository;
 import com.mindhub.homebanking.repositories.ClientRepository;
 import com.mindhub.homebanking.repositories.TransactionRepository;
+import com.mindhub.homebanking.services.AccountService;
+import com.mindhub.homebanking.services.ClientService;
+import com.mindhub.homebanking.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,13 +25,13 @@ import java.util.stream.Collectors;
 public class TransactionsController {
 
     @Autowired
-    private AccountRepository accountRepository;
+    private TransactionService transactionService;
 
     @Autowired
-    private ClientRepository clientRepository;
+    private AccountService accountService;
 
     @Autowired
-    private TransactionRepository transactionRepository;
+    private ClientService clientService;
 
     @Transactional
     @RequestMapping(path = "/api/transactions", method = RequestMethod.POST)
@@ -67,14 +67,15 @@ public class TransactionsController {
             return new ResponseEntity<>("They are the same accounts, they cannot be the same ", HttpStatus.FORBIDDEN);
         }
 
-        Client client = clientRepository.findByEmail(authentication.getName());
+        Client client = clientService.findByEmail(authentication.getName());
 
-        Account account = accountRepository.findByNumberAndClient(numberOrigin, client);
+        Account account = accountService.findByNumberAndClient(numberOrigin, client);
 
-        Account accountDest = accountRepository.findByNumber(numberDestiny);
+        Account accountDest = accountService.findByNumber(numberDestiny);
+
 
         if ( account == null ){
-            return new ResponseEntity<>("the account does not belong to the customer", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("source account does not exist", HttpStatus.FORBIDDEN);
         }
 
         if (accountDest == null){
@@ -86,16 +87,16 @@ public class TransactionsController {
             account.setBalance(account.getBalance() - amount);
             accountDest.setBalance(accountDest.getBalance() + amount);
 
-            Transaction transactionDebit = new Transaction(TransactionType.DEBIT, amount, LocalDateTime.now(), description + " " + account.getNumber());
+            Transaction transactionDebit = new Transaction(TransactionType.DEBIT, amount, LocalDateTime.now(), description + " " + accountDest.getNumber());
 
-            Transaction transactionCredit = new Transaction(TransactionType.CREDIT, amount, LocalDateTime.now(), description + " " + accountDest.getNumber());
+            Transaction transactionCredit = new Transaction(TransactionType.CREDIT, amount, LocalDateTime.now(), description + " " + account.getNumber());
 
-            transactionRepository.save(transactionDebit);
-            transactionRepository.save(transactionCredit);
+            transactionService.transactionSave(transactionDebit);
+            transactionService.transactionSave(transactionCredit);
             account.addTransaction(transactionDebit);
             accountDest.addTransaction(transactionCredit);
-            accountRepository.save(account);
-            accountRepository.save(accountDest);
+            accountService.addAccount(account);
+            accountService.addAccount(accountDest);
         } else {
 
             return new ResponseEntity<>("there is not enough balance", HttpStatus.FORBIDDEN);

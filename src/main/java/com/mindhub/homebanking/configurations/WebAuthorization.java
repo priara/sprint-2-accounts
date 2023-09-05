@@ -25,11 +25,11 @@ import javax.servlet.http.HttpSession;
 
                     .antMatchers("/web/index.html", "/web/index.js","/web/styleindex.css","/web/images/**").permitAll()
 
-                    .antMatchers(HttpMethod.POST,"/api/login", "/api/logout").permitAll()
+                    .antMatchers(HttpMethod.POST,"/api/login", "/api/logout", "/api/clients").permitAll()
 
-                    .antMatchers(HttpMethod.GET,"/api/clients/current").hasAuthority("CLIENT")
+                    .antMatchers(HttpMethod.GET,"/api/clients/current", "/api/loans").hasAuthority("CLIENT")
 
-                    .antMatchers(HttpMethod.POST,"/api/clients/current/cards","/api/transactions").hasAuthority("CLIENT")
+                    .antMatchers(HttpMethod.POST,"/api/clients/current/cards","/api/transactions", "/api/loans").hasAuthority("CLIENT")
 
                     .antMatchers(HttpMethod.GET, "/api/clients","/rest/clients").hasAuthority("ADMIN")
 

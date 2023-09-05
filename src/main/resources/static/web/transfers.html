@@ -29,7 +29,7 @@
             <nav class="d-flex flex-column justify-content-end flex-lg-row align-items-center gap-3 gap-md-4 m-2">
                 <a class=" anchors" href="./accounts.html"><span></span>Accounts <span class="ms-2">|</span></a>
                 <a class=" anchors" href="./cards.html">Cards <span class="ms-2">|</span></a>
-                <a class="anchors" href="#">Loans <span class="ms-2">|</span></a>
+                <a class="anchors" href="./loan-application.html">Loans <span class="ms-2">|</span></a>
                 <a class=" anchorfav" href="./transfers.html">Transactions <span class="ms-2">|</span></a>
                 <button type="button" v-on:click="logout" class="button rounded-5 p-2"><span><img class="imgnav "
                             src="./images/exit.png" alt=""></span></button>
@@ -42,7 +42,7 @@
             
                 
 
-                <section class="d-flex flex-column flex-lg-row  align-items-center justify-content-center">
+                <section class="d-flex flex-column flex-lg-row  align-items-center justify-content-center p-4">
                     <div class="d-flex flex-column">
                         <h5 class="text-center">Choose which account you want to transfer to</h5>
                         <div class="d-flex justify-content-center gap-4">
@@ -73,7 +73,7 @@
                           <select v-model="selectedNumberDestiny"  class="form-select" aria-label="Default select example">
                             <option value="" >Select the destination account</option>
                             <template v-for="account of accounts">
-                                <option  :value="account.number" >{{account.number}} ${{account.balance}}</option>
+                                <option :value="account.number" >{{account.number}} ${{account.balance}}</option>
                             </template>
                             
                           </select>
@@ -130,7 +130,7 @@
                     </button>
                 </form>
                 </div>
-                <img src="./images/4573-removebg-preview.png" alt="">
+                <img class="imgtransfer" src="./images/4573-removebg-preview.png" alt="">
 
             </section>
 

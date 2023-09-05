@@ -28,7 +28,7 @@
     <nav class="d-flex flex-column justify-content-end flex-lg-row align-items-center gap-3 gap-md-4 m-2">
         <a class=" anchorfav" href="#"><span></span>Accounts <span class="ms-2">|</span></a>
         <a class=" anchors" href="./cards.html">Cards <span class="ms-2">|</span></a>
-        <a class="anchors" href="#">Loans <span class="ms-2">|</span></a>
+        <a class="anchors" href="./loan-application.html">Loans <span class="ms-2">|</span></a>
         <a class="anchors text-info" href="./transfers.html">Transactions <span class="ms-2">|</span></a>
         <button type="button" v-on:click="logout" class="button rounded-5 p-2"><span><img class="imgnav "
                     src="./images/exit.png" alt=""></span></button>
@@ -50,7 +50,7 @@
         
         <template v-if="accounts.length > 0" v-for=" account of accounts " :key="accounts.id">
 
-            <article class="article-wrapper col-8 col-sm-8 col-md-6 col-lg-4 gap-2">
+            <article class="article-wrapper col-6 col-sm-6 col-md-8 col-lg-10 gap-2">
                 <div class="project-info">
                   <div class="flex-pr">
                     <div class="project-title fs-4 text" v-cloak>Account Number : {{account.number}}</div>
@@ -95,12 +95,14 @@
             </div>
         </article>
 
+
         </template>
+        
 
         <template v-else="">
           <h3>You do not have loans</h3>
         </template>
-
+        <button> apply </button>
 
         </section>
 

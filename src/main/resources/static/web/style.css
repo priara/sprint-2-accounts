@@ -235,22 +235,22 @@ td{
 }
 
 .articleloans{
-    background-color: rgb(42, 106, 179);
-    box-shadow: 0 0 0 2px rgb(11, 85, 155), 8px 8px 0 0 rgb(7, 53, 169);
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 0 0 2px rgb(255, 255, 255), 8px 8px 0 0 rgb(232, 0, 0);
     text-align: center;
 }
 
 .articleloans:hover{
-    box-shadow: 10px 10px 0 #042083;
+  box-shadow: 10px 10px 0 #f20707;
 }
 .project-loans{
-  color: white;
+  color: black;
   font-weight: 500;
   font-size: 2rem!important;
   
 }
 .project-type-loans{
-  color: white!important;
+  color: black!important;
   font-weight: 500;
   font-size: 1.5rem!important;
 }
@@ -704,4 +704,46 @@ td{
  .fancy:hover .bottom-key-2 {
   right: 0;
   width: 0;
+}
+
+.imgtransfer{
+  width: 28rem;
+}
+
+@media (max-width: 500px){
+  .imgtransfer{
+    width: 20rem;
+  }
+
+}
+
+/* LOAN-APPLICATION.HTML 
+FORM */
+
+.formloan{
+  border: 2px solid #355891;
+  border-radius: 2rem;
+  padding: 3rem;
+  width: 30rem;
+  background-color: #355891;
+  color: white;
+  font-size: 1.2rem;
+}
+.mainloan{
+  padding: 0;
+}
+.buttonloan{
+  width: 25%;
+}
+.imgloan{
+  width: 30rem;
+}
+@media (max-width: 560px){
+  .formloan{
+    width: 20rem;
+  }
+  .imgloan{
+    width: 20rem;
+  }
+
 }

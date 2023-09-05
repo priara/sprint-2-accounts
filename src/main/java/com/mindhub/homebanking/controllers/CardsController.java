@@ -5,6 +5,9 @@ import com.mindhub.homebanking.models.*;
 import com.mindhub.homebanking.repositories.AccountRepository;
 import com.mindhub.homebanking.repositories.CardRepository;
 import com.mindhub.homebanking.repositories.ClientRepository;
+import com.mindhub.homebanking.services.AccountService;
+import com.mindhub.homebanking.services.CardsService;
+import com.mindhub.homebanking.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.http.HttpStatus;
@@ -29,14 +32,13 @@ import static com.mindhub.homebanking.models.CardType.DEBIT;
 @RestController
 public class CardsController {
 
-    @Autowired
-    private AccountRepository accountRepository;
 
     @Autowired
-    private ClientRepository clientRepository;
+    private ClientService clientService;
 
     @Autowired
-    private CardRepository cardRepository;
+    private CardsService cardsService;
+
 
     @RequestMapping(path = "/api/clients/current/cards", method = RequestMethod.POST)
     public ResponseEntity<Object> createCards(
@@ -47,7 +49,7 @@ public class CardsController {
             return new ResponseEntity<>("Unauthorized", HttpStatus.UNAUTHORIZED);
         }
 
-        Client client = clientRepository.findByEmail(authentication.getName());
+        Client client = clientService.findByEmail(authentication.getName());
 
         Set<Card> cards = client.getCards();
 
@@ -55,14 +57,8 @@ public class CardsController {
             return new ResponseEntity<>("Maximum cards reached", HttpStatus.FORBIDDEN);
         }
 
-        if (type != DEBIT && type != CREDIT){
-            return new ResponseEntity<>("does not match any type", HttpStatus.FORBIDDEN);
-        }
         CardType cardType = type;
 
-        if (color != GOLD && color != PLATINUM && color != SILVER){
-            return new ResponseEntity<>("does not match any colorr", HttpStatus.FORBIDDEN);
-        }
         CardColor cardColor = color;
 
 
@@ -89,8 +85,8 @@ public class CardsController {
 
             Card newCard = new Card(cardHolder, cardType, cardColor, formattedNumberCard, cvv, formattedDate, formattedFutureDate);
             client.addCard(newCard);
-            cardRepository.save(newCard);
-            clientRepository.save(client);
+            cardsService.saveCard(newCard);
+            clientService.saveClient(client);
 
             return new ResponseEntity<>("Card created successfully", HttpStatus.CREATED);
         }
