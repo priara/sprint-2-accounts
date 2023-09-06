@@ -53,24 +53,21 @@ public class LoanController {
                 return new ResponseEntity<>("Unauthorized", HttpStatus.UNAUTHORIZED);
             }
 
-            if (loanApplicationDTO.getId() <= 0){
-                return new ResponseEntity<>("el id es incorrecto", HttpStatus.FORBIDDEN);
-            }
             if (loanApplicationDTO.getName().isBlank()){
-                return new ResponseEntity<>("el nombre esta vacio", HttpStatus.FORBIDDEN);
+                return new ResponseEntity<>("the name is empty", HttpStatus.FORBIDDEN);
             }
             if (loanApplicationDTO.getAmount() <=0){
-                return new ResponseEntity<>("el monto es incorrecto", HttpStatus.FORBIDDEN);
+                return new ResponseEntity<>("the amount is wrong", HttpStatus.FORBIDDEN);
             }
             if (loanApplicationDTO.getPayments() <=0){
-                return new ResponseEntity<>("las cuotas son incorrectas", HttpStatus.FORBIDDEN);
+                return new ResponseEntity<>("the odds are wrong", HttpStatus.FORBIDDEN);
             }
             if (loanApplicationDTO.getNumber().isBlank()){
-                return new ResponseEntity<>("el numero esta vacio", HttpStatus.FORBIDDEN);
+                return new ResponseEntity<>("the number is empty", HttpStatus.FORBIDDEN);
             }
 
 
-            Loan loan = loanService.findById(loanApplicationDTO.getId());
+            Loan loan = loanService.findByName(loanApplicationDTO.getName());
 
             Client client = clientService.findByEmail(authentication.getName());
 
@@ -78,15 +75,15 @@ public class LoanController {
 
 
             if (loan == null){
-                return new ResponseEntity<>("no existe el loan", HttpStatus.UNAUTHORIZED);
+                return new ResponseEntity<>("the loan does not exist", HttpStatus.UNAUTHORIZED);
             }
 
             if (loanApplicationDTO.getAmount() > loan.getMaxAmount()){
-                return new ResponseEntity<>("esta mal el monto ingresado", HttpStatus.FORBIDDEN);
+                return new ResponseEntity<>("the amount entered is wrong", HttpStatus.FORBIDDEN);
             }
 
             if (!loan.getPayments().contains(loanApplicationDTO.getPayments())){
-                return new ResponseEntity<>("cuotas incorrectas", HttpStatus.FORBIDDEN);
+                return new ResponseEntity<>("wrong odds", HttpStatus.FORBIDDEN);
             }
 
             if (account == null) {
@@ -99,7 +96,7 @@ public class LoanController {
 
             /*hacer la verificacion para saber si el usuario ya tiene un prestamo*/
             if (clientLoanService.existsByClientAndLoan(client,loan)){
-                return new ResponseEntity<>("ya tiene este prestamo", HttpStatus.FORBIDDEN);
+                return new ResponseEntity<>("already have this loan", HttpStatus.FORBIDDEN);
             }
 
             ClientLoan clientLoan = new ClientLoan(sumaAmount, loanApplicationDTO.getPayments());

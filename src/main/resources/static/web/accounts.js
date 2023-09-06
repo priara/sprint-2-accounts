@@ -76,6 +76,10 @@ const options = {
                 }
             });
         },
+        applyloans(){
+            window.location.href = "http://localhost:8080/web/loan-application.html"
+
+        },
         logout() {
             axios.post("/api/logout")
                 .then(response => {

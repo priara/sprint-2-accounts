@@ -2,7 +2,7 @@ package com.mindhub.homebanking.dto;
 
 public class LoanApplicationDTO {
 
-    private long id;
+
 
     private String name;
 
@@ -15,16 +15,11 @@ public class LoanApplicationDTO {
     public LoanApplicationDTO() {
     }
 
-    public LoanApplicationDTO(long id, double amount, int payments, String number, String name) {
-        this.id = id;
+    public LoanApplicationDTO( double amount, int payments, String number, String name) {
         this.amount = amount;
         this.payments = payments;
         this.number = number;
         this.name= name;
-    }
-
-    public long getId() {
-        return id;
     }
 
     public double getAmount() {

@@ -11,7 +11,9 @@ public interface LoanService {
 
     List<LoanDTO> getLoans();
 
-    Loan findById(long id);
+    Loan findByName(String name);
 
     void saveLoan(Loan loan);
+
+
 }

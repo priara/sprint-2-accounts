@@ -733,7 +733,7 @@ FORM */
   padding: 0;
 }
 .buttonloan{
-  width: 25%;
+  width: 10rem;
 }
 .imgloan{
   width: 30rem;
@@ -746,4 +746,14 @@ FORM */
     width: 20rem;
   }
 
+}
+
+/* accounts button aply loans */
+.buttonApply{
+  border-radius: 2rem!important;
+  background-color: rgb(9, 127, 177)!important;
+  color: white;
+  font-size: 1.2rem;
+  border: 2px solid rgb(9, 82, 113);
+  padding: 0.5rem;
 }

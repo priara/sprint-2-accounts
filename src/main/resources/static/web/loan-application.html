@@ -33,13 +33,13 @@
 
 
         </header>
-        <main class="mainloan d-flex flex-column align-items-center">
+        <main class="mainloan d-flex flex-column align-items-center p-2">
             <h1 class="text-dark">Request your loan!</h1>
             <section class="d-flex flex-column flex-lg-row-reverse align-items-center justify-content-center p-4">
                 
                 <form class="formloan d-flex flex-column gap-4">
                     <div>
-                        <label for="exampleInputPassword1" class="form-label">Type of loan</label>
+                        <label for="loan" class="form-label">Type of loan</label>
                         <select @change="filterPayments" v-model="selectedName" class="form-select" aria-label="Default select example">
                             <option value="">Open this select menu</option>
                             <template v-for="loan of loans">
@@ -50,10 +50,10 @@
                     </div>
                     
                     <div>
-                        <label for="exampleInputPassword1" class="form-label">Payments available</label>
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected>Open this select menu</option>
-                            <template v-if="loanPayments.length > 0" v-for="payment of loanPayments">
+                        <label for="payment" class="form-label">Payments available</label>
+                        <select v-model="selectedPayments" class="form-select" aria-label="Default select example">
+                            <option value="">Open this select menu</option>
+                            <template v-if="typeof loanPayments !== 'undefined' && loanPayments.length > 0" v-for="payment of loanPayments">
                                 <option :value="payment">{{payment}}</option>
                             </template>
                             <template v-else>
@@ -66,18 +66,21 @@
 
                     <div class="mb-3">
                       <label for="amount" class="form-label">Amount</label>
-                      <input type="number" class="form-control" id="amount">
+                      <input v-model="selectedAmount"  type="text" class="form-control" id="amount">
                     </div>
 
                     <div>
                         <label for="exampleInputPassword1" class="form-label">Destination account</label>
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected>Open this select menu</option>
-                            <option value="1">One</option>
+                        <select v-model="selectedNumber" class="form-select" aria-label="Default select example">
+                            <option value="">Open this select menu</option>
+                            <template v-for="account of accounts">
+                                <option :value="account.number">{{account.number}}</option>
+                            </template>
+                            
                           </select>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <button type="submit" class="buttonloan btn btn-light">Submit</button>
+                        <button v-on:click.prevent="getLoanss" type="submit" class="buttonloan btn btn-light">CREATE LOAN</button>
                     </div>
                     
 
