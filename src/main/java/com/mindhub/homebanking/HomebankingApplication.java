@@ -40,7 +40,7 @@ public class HomebankingApplication {
 			clientRepository.save(new Client("David", "Palmer", "david@gmail.com"));*/
 
 
-			Client melba = new Client("Melba", "Morel", "melba@gmail.com", passwordEncoder.encode("203560"));
+			/*Client melba = new Client("Melba", "Morel", "melba@gmail.com", passwordEncoder.encode("203560"));
 			clientRepository.save(melba);
 
 
@@ -66,7 +66,7 @@ public class HomebankingApplication {
 			michelle.addAccount(accountMichelle2);
 			accountRepository.save(accountMichelle2);
 
-			/*LOAN/PRESTAMOS*/
+			*//*LOAN/PRESTAMOS*//*
 
 			Loan mortgage = new Loan( "Mortgage", 500000, Arrays.asList(12, 24, 36, 48, 60));
 			loanRepository.save(mortgage);
@@ -75,7 +75,7 @@ public class HomebankingApplication {
 			Loan auto = new Loan ("Auto", 300000, Arrays.asList( 6,12,24,36));
 			loanRepository.save(auto);
 
-			/*PRESTAMOS CLIENTE MELBA*/
+			*//*PRESTAMOS CLIENTE MELBA*//*
 			ClientLoan melbaLoan1 = new ClientLoan( 400000 , 60);
 			melba.addClientLoan(melbaLoan1);
 			mortgage.addClientLoan(melbaLoan1);
@@ -86,7 +86,7 @@ public class HomebankingApplication {
 			clientLoanRepository.save(melbaLoan2);
 
 
-			/*PRESTAMOS CLIENTE MICHELLE*/
+			*//*PRESTAMOS CLIENTE MICHELLE*//*
 			ClientLoan michelleLoan1 = new ClientLoan(100000, 24);
 			michelle.addClientLoan(michelleLoan1);
 			personal.addClientLoan(michelleLoan1);
@@ -97,7 +97,7 @@ public class HomebankingApplication {
 			clientLoanRepository.save(michelleLoan2);
 
 
-			/*TARJETAS*/
+			*//*TARJETAS*//*
 
 
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/yyyy");
@@ -120,9 +120,9 @@ public class HomebankingApplication {
 			michelle.addCard(michelleCard1);
 			cardRepository.save(michelleCard1);
 
-			/*TRANSACTIONS*/
+			*//*TRANSACTIONS*/
 
-			Transaction transaction1 = new Transaction(TransactionType.CREDIT, 1200, LocalDateTime.now(), "Cinema");
+			/*Transaction transaction1 = new Transaction(TransactionType.CREDIT, 1200, LocalDateTime.now(), "Cinema");
 			accountMelba1.addTransaction(transaction1);
 			transactionRepository.save(transaction1);
 
@@ -138,7 +138,7 @@ public class HomebankingApplication {
 
 			Transaction transaction4 = new Transaction(TransactionType.DEBIT, -300, this.today.plusDays(1).atStartOfDay(), "Test Debit");
 			accountMelba2.addTransaction(transaction4);
-			transactionRepository.save(transaction4);
+			transactionRepository.save(transaction4);*/
 
 			/*Transaction transaction5 = new Transaction(TransactionType.CREDIT, 900, LocalDateTime.now(), accountMichelle1, "hola");
 			accountMelba2.addTransaction(transaction5);

@@ -205,11 +205,15 @@ nav a{
   /* ACCOUNT.HTML */
 .table, th, td{
   border: 1px solid black;
-  border-collapse: collapse;
+  
   color: rgb(0, 0, 0)!important;
 }
 table{
   width: 30rem!important;
+  
+}
+.table{
+  border-radius: 20px!important;
   
 }
 
@@ -220,11 +224,13 @@ table{
 th{
   background-color: rgb(255, 255, 255)!important;
   font-weight: 600!important;
+  border-collapse: collapse;
 }
 
 td{
   background-color: rgb(255, 255, 255)!important;
   color: black!important;
+  border-collapse: collapse;
 }
 
 .creditGreen{
@@ -494,16 +500,25 @@ td{
   .formulario{
     width: 50%;
   }
+
+  .divcreatecards{
+    border: 4px dashed blue;
+    background-color: #7799c1;
+
+  }
 .sectionaccounts{
   width: 100%!important;
 }
 .buttoncreate{
   border-radius: 2rem!important;
-  background-color: rgb(9, 127, 177)!important;
+  background-color: rgb(7, 75, 105)!important;
   color: white;
   font-size: 1.2rem;
   border: 2px solid rgb(9, 82, 113);
+  width: 10rem;
 }
+
+
 
 /* CSS TRANSFER */
 
@@ -710,7 +725,7 @@ td{
   width: 28rem;
 }
 
-@media (max-width: 500px){
+@media screen and (max-width: 500px){
   .imgtransfer{
     width: 20rem;
   }
@@ -738,7 +753,7 @@ FORM */
 .imgloan{
   width: 30rem;
 }
-@media (max-width: 560px){
+@media screen and (max-width: 560px){
   .formloan{
     width: 20rem;
   }
@@ -757,3 +772,5 @@ FORM */
   border: 2px solid rgb(9, 82, 113);
   padding: 0.5rem;
 }
+
+

@@ -149,7 +149,7 @@
     border-radius: 20px;
   }
   
-  @media (max-width: 970px){
+  @media screen and (max-width: 970px){
     .imgindexmain{
       width: 60%!important;
       margin-top: 2rem;
@@ -160,7 +160,7 @@
   
   }
 
-  @media (max-width: 680px){
+  @media screen and (max-width: 680px){
     .imgindexmain{
       width: 85%!important;
     }

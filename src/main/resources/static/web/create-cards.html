@@ -37,8 +37,10 @@
 
     <main class="d-flex flex-column justify-content-center align-items-center"> 
 
-        <section class="formulario d-flex flex-column align-items-center gap-5">
-          <h1>Request your new card!</h1>
+        <section class="formulario d-flex flex-column align-items-center gap-3 mb-5">
+          <h1 class="text-center">Request your new card!</h1>
+
+          <div class="divcreatecards p-2 d-flex flex-column gap-3 align-items-center p-5 col-sm-12 col-md-12 col-lg-12">
             <select v-model="selectedCardType" class="form-select" aria-label="Default select example">
               <option value="" disabled>Choose card type</option>
                 <option v-for="type of cardType" :key="type" :value="type">{{ type }}</option>
@@ -50,6 +52,8 @@
               </select>
 
             <button type="button" v-on:click="createCards" class="buttoncreate mt-3 p-2"> CREATE </button>
+          </div>
+            
             
         </section>
         

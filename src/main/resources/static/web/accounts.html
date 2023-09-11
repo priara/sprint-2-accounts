@@ -42,6 +42,8 @@
         <h1 class="p-1 ms-3 fw-semibold text-dark">Welcome {{client.firstName}}</h1>
       </section>
 
+      
+
       <section class="sectionaccounts d-flex flex-column align-items-center">
         <h3 class="borderh2">Your Accounts</h3>
       
@@ -50,7 +52,7 @@
         
         <template v-if="accounts.length > 0" v-for=" account of accounts " :key="accounts.id">
 
-            <article class="article-wrapper col-6 col-sm-6 col-md-8 col-lg-10 gap-2">
+            <article class="article-wrapper col-6 col-sm-6 col-md-8 col-lg-8 gap-2">
                 <div class="project-info">
                   <div class="flex-pr">
                     <div class="project-title fs-4 text" v-cloak>Account Number : {{account.number}}</div>

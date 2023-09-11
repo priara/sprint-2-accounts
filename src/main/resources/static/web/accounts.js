@@ -20,6 +20,7 @@ const options = {
     created() {
 
         this.getAccountNumber();
+        
 
     },
 
@@ -108,3 +109,4 @@ const options = {
 const app = createApp(options)
 
 app.mount('#app')
+
