@@ -44,9 +44,61 @@
 
       
 
-      <section class="sectionaccounts d-flex flex-column align-items-center">
+      <section class="sectionaccounts d-flex flex-column align-items-center gap-4">
         <h3 class="borderh2">Your Accounts</h3>
+        <div class="d-flex gap-3 justify-content-center">
+          <button v-if="accountsLength < 3" data-bs-toggle="modal" data-bs-target="#myModalCreate" type="button" class="buttonApply  mt-3 p-2"> Create Account </button>
       
+          <button type="button" class="buttonremove mt-3 p-2" data-bs-toggle="modal" data-bs-target="#myModal">
+          <span><img class="imgremove" src="./images/removecard.png" alt=""></span> Remove Account
+        </button>
+        </div>
+
+        <!-- MODAL CREATE ACCOUNT -->
+        <div class="modal fade" id="myModalCreate" tabindex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Choose the account you want to create</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+
+              <select v-model="selectType"  class="form-select" aria-label="Default select example">
+                  <option value="CHECKING">Checking account</option>
+                  <option value="SAVINGS">Savings account</option>
+                
+              </select>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button v-on:click ="createAccount" type="button" class="btn btn-primary">Create</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MODAL REMOVE ACCOUNT -->
+        <div class="modal fade" id="myModal" tabindex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Choose the account you want to remove</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+
+              <select v-model="selectedAccount"  class="form-select" aria-label="Default select example">
+
+                <template v-for="account in accounts" >
+                  <option :value="account">{{account.number}} ${{account.balance}}</option>
+                </template>
+                
+              </select>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button v-on:click ="removeAccounts" type="button" class="btn btn-primary">Remove</button>
+              </div>
+            </div>
+          </div>
+        </div>
       
       <div class="d-flex flex-wrap align-items-center justify-content-center gap-5 mt-5">
         
@@ -55,7 +107,8 @@
             <article class="article-wrapper col-6 col-sm-6 col-md-8 col-lg-8 gap-2">
                 <div class="project-info">
                   <div class="flex-pr">
-                    <div class="project-title fs-4 text" v-cloak>Account Number : {{account.number}}</div>
+                    <div class="project-title fs-4 text">{{account.type}} ACCOUNT</div>
+                    <div class="project-title fs-4 text" v-cloak>Account Number : {{account.number}} </div>
                       <div class="project-hover">
                         <a v-bind:href="'./account.html?id=' + account.id"><svg style="color: black;" width="2em" height="2em" color="black" stroke-linejoin="round" stroke-linecap="round" viewBox="0 0 24 24" stroke-width="2" fill="none" stroke="currentColor"><polyline points="12 5 19 12 12 19"></polyline></svg></a>
                         </div>
@@ -75,13 +128,13 @@
 
       </section>
 
-        <button v-if="accountsLength < 3" type="button" v-on:click="createAccount" class="buttoncreate  p-2"> CREATE ACCOUNT </button>
+        
 
 
-        <section class="d-flex flex-column align-items-center col-12 gap-5 p-4">
+        <section class="d-flex flex-column align-items-center col-12 gap-4 p-4">
 
           <h3 class="borderh2">Your Loans</h3>
-
+          <button class="buttonApply" v-on:click.prevent="applyloans"> Apply </button>
         <template v-if="loans.length > 0" v-for=" loan of loans ">
 
           <article class="article-wrapper articleloans col-12 col-md-8 col-lg-6 gap-2">
@@ -104,7 +157,7 @@
         <template v-else="">
           <h3>You do not have loans</h3>
         </template>
-        <button class="buttonApply" v-on:click.prevent="applyloans"> Apply </button>
+        
 
         </section>
 

@@ -23,6 +23,8 @@ public class CardDTO {
 
     private String formattedFutureDate;
 
+    private Boolean isActive;
+
     public CardDTO() {
     }
 
@@ -36,6 +38,7 @@ public class CardDTO {
         this.cvv = card.getCvv();
         this.formattedDate = card.getFormattedDate();
         this.formattedFutureDate = card.getFormattedFutureDate();
+        this.isActive = card.getisActive();
 
     }
 
@@ -63,9 +66,6 @@ public class CardDTO {
         return cvv;
     }
 
-    /*public LocalDate getThruDate() {
-        return thruDate;
-    }*/
 
     public String getFormattedDate() {
         return formattedDate;
@@ -73,5 +73,9 @@ public class CardDTO {
 
     public String getFormattedFutureDate() {
         return formattedFutureDate;
+    }
+
+    public Boolean getisActive() {
+        return isActive;
     }
 }

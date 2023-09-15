@@ -13,6 +13,8 @@ const options = {
                 minimumFractionDigits: 0
             }),
             accountsLength: 0,
+            selectedAccount:[],
+            selectType:[],
 
         }
     },
@@ -31,55 +33,37 @@ const options = {
                 .then(response => {
                     console.log(response);
                     this.client = response.data;
-                    this.accounts = this.client.accounts;
+                    this.accounts = this.client.accounts.filter(account => account.active);
                     this.loans = this.client.loans;
                     console.log(this.loans);
                     this.accounts.sort((a, b) => a.id - b.id);
                     this.loans.sort((a, b) => a.id - b.id);
-                    this.accountsLength = this.accounts.length;
-                    console.log(this.accountsLength);
                 })
                 .catch((error) => console.log(error));
         },
         createAccount() {
-            Swal.fire({
-                text: '¿Are you sure you want to create an account?',
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonText: 'Yes',
-                cancelButtonText: 'No'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // El usuario hizo clic en "Sí", realiza la acción de crear la cuenta
-                    axios.post("/api/clients/current/accounts")
+                    axios.post("/api/clients/current/accounts", `type=${this.selectType}`)
                         .then(response => {
                             console.log(response);
+                            this.selectType = {};
+                            document.location.reload()
 
-                            Swal.fire({
-                                icon: 'success',
-                                text: 'Account created successfully',
-                            }).then(() => {
-                                // Recarga la página después de mostrar la notificación
-                                location.reload();
-                            });
-                            setTimeout(() => {
-                                window.location.href = "http://localhost:8080/web/accounts.html"
-                            }, 2000)
+                            
                         }).catch((error) => console.log(error));
-                } else {
-                    // El usuario hizo clic en "No" o cerró el cuadro de diálogo
-                    Swal.fire({
-                        icon: 'info',
-                        text: 'Operation cancelled',
-                        showConfirmButton: false,
-                        timer: 1000
-                    });
-                }
-            });
-        },
+                }, 
         applyloans(){
             window.location.href = "http://localhost:8080/web/loan-application.html"
 
+        },
+        removeAccounts(){
+            axios.patch(`/api/clients/current/accounts/${this.selectedAccount.id}`)
+            .then(response => {
+                this.selectedAccount = {};
+                window.location.href = "http://localhost:8080/web/accounts.html"
+
+            }).catch(error => {
+                console.log(error.response.data);
+              });
         },
         logout() {
             axios.post("/api/logout")

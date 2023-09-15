@@ -17,6 +17,7 @@ const options = {
                 currency: 'USD',
                 minimumFractionDigits: 0
             }),
+            
 
         }
     },
@@ -41,6 +42,7 @@ const options = {
                     console.log(this.accountSelect);
                     this.transactions = response.data.transaction;
                     console.log(this.transactions);
+                    
 
 
                 })

@@ -18,6 +18,10 @@ public class Transaction {
 
     private String description;
 
+    private double currentBalance;
+
+    private Boolean active;
+
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;
@@ -25,11 +29,13 @@ public class Transaction {
     public Transaction() {
     }
 
-    public Transaction(TransactionType type, double amount, LocalDateTime date, String description) {
+    public Transaction(TransactionType type, double amount, LocalDateTime date, String description, double currentBalance, Boolean active) {
         this.type = type;
         this.amount = amount;
         this.date = date;
         this.description = description;
+        this.currentBalance = currentBalance;
+        this.active= active;
     }
 
     public String getDescription() {
@@ -78,5 +84,21 @@ public class Transaction {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    public double getCurrentBalance() {
+        return currentBalance;
+    }
+
+    public void setCurrentBalance(double currentBalance) {
+        this.currentBalance = currentBalance;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 }

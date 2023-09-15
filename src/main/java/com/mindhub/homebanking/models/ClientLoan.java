@@ -26,7 +26,6 @@ public class ClientLoan {
     private Loan loan;
 
 
-
     public ClientLoan() {
     }
 

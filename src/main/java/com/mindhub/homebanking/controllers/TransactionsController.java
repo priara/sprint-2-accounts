@@ -11,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
@@ -34,7 +31,7 @@ public class TransactionsController {
     private ClientService clientService;
 
     @Transactional
-    @RequestMapping(path = "/api/transactions", method = RequestMethod.POST)
+    @PostMapping("/api/transactions")
     public ResponseEntity<Object> createTransactions(
 
             @RequestParam double amount, @RequestParam String description,
@@ -84,12 +81,14 @@ public class TransactionsController {
 
         if (account.getBalance() >= amount) {
 
+
             account.setBalance(account.getBalance() - amount);
             accountDest.setBalance(accountDest.getBalance() + amount);
 
-            Transaction transactionDebit = new Transaction(TransactionType.DEBIT, amount, LocalDateTime.now(), description + " " + accountDest.getNumber());
 
-            Transaction transactionCredit = new Transaction(TransactionType.CREDIT, amount, LocalDateTime.now(), description + " " + account.getNumber());
+            Transaction transactionDebit = new Transaction(TransactionType.DEBIT,  -amount, LocalDateTime.now(), description + " " + accountDest.getNumber(), account.getBalance()-amount,true);
+
+            Transaction transactionCredit = new Transaction(TransactionType.CREDIT, amount, LocalDateTime.now(), description + " " + account.getNumber(), accountDest.getBalance()+amount,true);
 
             transactionService.transactionSave(transactionDebit);
             transactionService.transactionSave(transactionCredit);

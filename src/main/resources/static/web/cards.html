@@ -47,6 +47,37 @@
 
 
         <div  class="d-flex flex-column align-items-center gap-5 p-5">
+          <div class="d-flex  gap-4">
+            <button v-if="cards.length < 6" type="button" v-on:click="createCards" class="buttonApply mt-3 p-2"> CREATE CARD </button>
+          
+            <button type="button" class="buttonremove mt-3 p-2" data-bs-toggle="modal" data-bs-target="#myModal">
+              <span><img class="imgremove" src="./images/removecard.png" alt=""></span> REMOVE CARD
+            </button>
+          </div>
+
+          <div class="modal fade" id="myModal" tabindex="-1">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Choose the card you want to remove</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <select v-model="selectedCard"  class="form-select" aria-label="Default select example">
+
+                  <template v-for="card in cards" >
+                    <option :value="card">{{card.type}} {{card.number}}</option>
+                  </template>
+                  
+                </select>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button v-on:click ="removeCards" type="button" class="btn btn-primary">Remove</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
             <h3>CREDIT CARDS</h3>
 
             <section id="creditcardcontainer" class="d-flex flex-column justify-content-center flex-lg-row gap-5">
@@ -62,8 +93,8 @@
                     </div>
                     <p class="card_numer m-0">{{card.number}}</p>
                     <div class="divdate card__space-25 d-flex">
-                      <p class="dates card__info">{{ card.formattedDate }} </p>
-                      <p class="dates card__info">- {{card.formattedFutureDate}}</p>
+                      <p class="dates card__info">{{ card.formattedDate}}  </p>
+                      <p v-bind:class="card.formattedFutureDate < currentDate ? 'text-danger' : ''" class="dates card__info">- {{card.formattedFutureDate}}</p>
                     </div>
                     <div class="card__space-75">
                       <p class="cardholder card__info">{{card.cardholder}}</p>
@@ -125,7 +156,7 @@
                       </div>
                   </template>
                 </section>
-                <button v-if="cardsLength < 6" type="button" v-on:click="createCards" class="buttoncreate mt-3 p-2"> CREATE CARD </button>
+                
             </div>
             
           </div>

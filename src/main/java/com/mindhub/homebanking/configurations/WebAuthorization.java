@@ -33,6 +33,8 @@ import javax.servlet.http.HttpSession;
 
                     .antMatchers(HttpMethod.GET, "/api/clients","/rest/**").hasAuthority("ADMIN")
 
+                    .antMatchers(HttpMethod.PATCH, "/api/clients/current/cards/{id}", "/api/clients/current/accounts/{id}").hasAuthority("CLIENT")
+
                     .antMatchers("/manager.html", "/manager.js").hasAuthority("ADMIN")
 
                     .antMatchers("/web/account.html","/web/cards.html","/web/cards.js","/web/style.css","/web/accounts.html", "/web/create-cards.html","/web/create-cards.js","/web/transfers.html", "/web/transfers.js").hasAuthority("CLIENT")

@@ -17,19 +17,9 @@ const options = {
 
     methods: {
         addClient(){
-            // let client = {
-            //     firstName: this.firstName,
-            //     lastName: this.lastName,
-            //     email:this.email,
-            // }
-            //enviar a la api un nuevo cliente
             axios.post("/api/clients", `firstName=${this.firstName}&lastName=${this.lastName}&email=${this.email}`)
             .then(response => {
                 console.log(response);
-                // this.clients.push(datos.data)
-                // this.firstName= "",
-                // this.lastName= "",
-                // this.email= ""
             })
                 
         },

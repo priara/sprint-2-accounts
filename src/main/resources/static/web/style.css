@@ -209,7 +209,7 @@ nav a{
   color: rgb(0, 0, 0)!important;
 }
 table{
-  width: 30rem!important;
+  width: 35rem!important;
   
 }
 .table{
@@ -387,7 +387,7 @@ td{
   .card__info {
       margin-bottom: 0;
       margin-top: 5px;
-      font-size: 16px;
+      font-size: 20px;
       line-height: 18px;
       color: #ffffff;
     letter-spacing: 1px;
@@ -464,7 +464,8 @@ td{
     font-size: 1.2rem!important;
   }
   .dates{
-    font-size: 0.8rem!important;
+    font-size: 1rem!important;
+    font-weight: 600;
   }
   .cardtype{
     font-size: 1.5rem!important;
@@ -763,14 +764,25 @@ FORM */
 
 }
 
+
 /* accounts button aply loans */
 .buttonApply{
   border-radius: 2rem!important;
-  background-color: rgb(9, 127, 177)!important;
+  background-color: #011936!important;
   color: white;
-  font-size: 1.2rem;
-  border: 2px solid rgb(9, 82, 113);
-  padding: 0.5rem;
+  font-size: 1rem;
+  border: 2px solid #011936;
+  padding: 1rem;
 }
+.buttonremove{
+  background-color: white;
+  border: 2px solid white;
+  color: black;
+  border-radius: 3rem;
+}
+.imgremove{
+  width: 2rem;
+}
+
 
 

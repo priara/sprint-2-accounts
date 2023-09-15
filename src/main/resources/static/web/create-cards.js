@@ -29,7 +29,7 @@ const options = {
               }).then((result) => {
                 if (result.isConfirmed) {
                   // El usuario hizo clic en "Sí", procede a crear la tarjeta
-                  axios.post("/api/clients/current/cards", `type=${this.selectedCardType}&color=${this.selectedCardColor}`)
+                  axios.post("/api/clients/current/cards", `type=${this.selectedCardType}&color=${this.selectedCardColor}&isActive=true`)
                   .then(response => {
                     console.log(response);
                     this.cards = response.data.cards;
@@ -45,6 +45,7 @@ const options = {
                     }, 1000)
                   })
                   .catch((error) => {
+                    console.log(error.response.data);
                     Swal.fire({
                       icon: 'error',
                       text: 'You already have a card with this type and color',

@@ -43,7 +43,7 @@
                         <select @change="filterPayments" v-model="selectedName" class="form-select" aria-label="Default select example">
                             <option value="">Open this select menu</option>
                             <template v-for="loan of loans">
-                                <option :value="loan.name">{{loan.name}}</option>
+                                <option :value="loan.name">{{loan.name}} - Interest {{loan.percentage}}%</option>
                             </template>
                             
                           </select>

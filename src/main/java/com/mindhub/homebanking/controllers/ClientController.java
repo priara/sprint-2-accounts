@@ -2,6 +2,7 @@ package com.mindhub.homebanking.controllers;
 
 import com.mindhub.homebanking.dto.ClientDTO;
 import com.mindhub.homebanking.models.Account;
+import com.mindhub.homebanking.models.AccountType;
 import com.mindhub.homebanking.models.Client;
 import com.mindhub.homebanking.repositories.AccountRepository;
 import com.mindhub.homebanking.repositories.ClientRepository;
@@ -33,13 +34,13 @@ public class ClientController {
     @Autowired
     private AccountService accountService;
 
-    @RequestMapping("/api/clients")
+    @GetMapping("/api/clients")
     public List<ClientDTO> getClients() {
         return clientService.getClientsDTO();
 
     }
 
-    @RequestMapping(path = "/api/clients/current", method = RequestMethod.GET)
+    @GetMapping("/api/clients/current")
     public ClientDTO getClientCurrent(Authentication authentication) {
 
 
@@ -51,13 +52,13 @@ public class ClientController {
 
 
 
-    @RequestMapping("/api/clients/{id}")
+    @GetMapping("/api/clients/{id}")
     public ClientDTO getClient(@PathVariable Long id){
         return clientService.findById(id);
 
 
     }
-    @RequestMapping(path = "/api/clients", method = RequestMethod.POST)
+    @PostMapping("/api/clients")
     public ResponseEntity<Object> register(
 
             @RequestParam String firstName, @RequestParam String lastName,
@@ -85,7 +86,7 @@ public class ClientController {
             numeroAleatorio = generateRandomNumber();
         }
 
-        Account account = new Account(numeroAleatorio, LocalDate.now(), 0);
+        Account account = new Account(numeroAleatorio, LocalDate.now(), 0, true, AccountType.SAVINGS);
 
 
         accountService.addAccount(account);

@@ -69,6 +69,7 @@
                                     <th scope="col" >Amount</th>
                                     <th scope="col" >Data</th>
                                     <th scope="col" >Description</th>
+                                    <th scope="col">Current Balance</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -78,6 +79,7 @@
                                     <td v-cloak> {{formatter.format(transaction.amount)}}</td>
                                     <td v-cloak>{{formattedDate(transaction.date)}}</td>
                                     <td v-cloak>{{transaction.description}}</td>
+                                    <td v-cloak>{{transaction.currentBalance}}</td>
                                 </tr>
                                 </template>
                             </tbody>

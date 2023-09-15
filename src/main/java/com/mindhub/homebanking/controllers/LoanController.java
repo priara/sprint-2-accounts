@@ -36,7 +36,7 @@ public class LoanController {
     @Autowired
     private TransactionService transactionService;
 
-    @RequestMapping(path = "/api/loans", method = RequestMethod.GET)
+    @GetMapping("/api/loans")
     public List<LoanDTO> getLoans(){
 
         List<LoanDTO> loans = loanService.getLoans();
@@ -46,7 +46,7 @@ public class LoanController {
 
 
     @Transactional
-    @RequestMapping(path = "/api/loans", method = RequestMethod.POST)
+    @PostMapping("/api/loans")
     public ResponseEntity<Object> createTransactions(@RequestBody LoanApplicationDTO loanApplicationDTO, Authentication authentication){
 
             if (authentication == null) {
@@ -92,7 +92,7 @@ public class LoanController {
 
             }
 
-            double sumaAmount = loanApplicationDTO.getAmount() + (loanApplicationDTO.getAmount() * 0.20);
+            double sumaAmount = loanApplicationDTO.getAmount() + (loanApplicationDTO.getAmount() * (loan.getPercentage() / 100.0));
 
             /*hacer la verificacion para saber si el usuario ya tiene un prestamo*/
             if (clientLoanService.existsByClientAndLoan(client,loan)){
@@ -105,7 +105,7 @@ public class LoanController {
             client.addClientLoan(clientLoan);
             clientLoanService.clientLoanSave(clientLoan);
 
-            Transaction transaction = new Transaction(TransactionType.CREDIT, loanApplicationDTO.getAmount(), LocalDateTime.now(), loan.getName() + " loan approved" );
+            Transaction transaction = new Transaction(TransactionType.CREDIT, loanApplicationDTO.getAmount(), LocalDateTime.now(), loan.getName() + " loan approved" ,account.getBalance() + loanApplicationDTO.getAmount(), true);
             account.addTransaction(transaction);
             transactionService.transactionSave(transaction);
 

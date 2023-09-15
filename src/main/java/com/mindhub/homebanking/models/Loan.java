@@ -16,7 +16,9 @@ public class Loan {
     @GenericGenerator(name = "native", strategy = "native")
 
     private long id;
+
     private String name;
+
     private double maxAmount;
 
     @OneToMany(mappedBy = "loan", fetch = FetchType.EAGER)
@@ -25,13 +27,16 @@ public class Loan {
     @ElementCollection
     private List<Integer> payments;
 
+    private Double percentage;
+
     public Loan() {
     }
 
-    public Loan(String name, double maxAmount, List<Integer> payments) {
+    public Loan(String name, double maxAmount, List<Integer> payments, Double percentage) {
         this.name = name;
         this.maxAmount = maxAmount;
         this.payments = payments;
+        this.percentage= percentage;
     }
 
 
@@ -74,5 +79,13 @@ public class Loan {
     public void addClientLoan(ClientLoan clientLoan){
         clientLoan.setLoan(this);
         clientLoans.add(clientLoan);
+    }
+
+    public Double getPercentage() {
+        return percentage;
+    }
+
+    public void setPercentage(Double percentage) {
+        this.percentage = percentage;
     }
 }

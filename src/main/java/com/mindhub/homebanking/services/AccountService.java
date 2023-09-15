@@ -10,13 +10,16 @@ public interface AccountService {
 
     List<AccountDTO> getAccounts();
 
-    AccountDTO findById(long id);
+
+    Account findById(Long id);
 
     Account findByNumber(String number);
 
     void addAccount (Account account);
 
     Account findByNumberAndClient(String number, Client client);
+
+    boolean existsByIdAndClient_Id(Long id,Long clientId);
 
 
 }
