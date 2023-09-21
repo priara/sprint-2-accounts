@@ -20,7 +20,9 @@ const options = {
     },
 
     methods: {
+      
         createLoan(){
+          
             this.listarray = this.selectedPayments.split(/\s*,\s*/);
             axios.post("/api/loans/create", {name:this.selectedName, maxAmount:this.selectedAmount,payments:this.listarray,percentage:this.selectedPercentage})
             .then(response => {

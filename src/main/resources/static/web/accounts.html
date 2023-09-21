@@ -88,7 +88,7 @@
               <select v-model="selectedAccount"  class="form-select" aria-label="Default select example">
 
                 <template v-for="account in accounts" >
-                  <option :value="account">{{account.number}} ${{account.balance}}</option>
+                  <option :value="account">{{account.number}} ${{account.balance.toFixed(2)}}</option>
                 </template>
                 
               </select>

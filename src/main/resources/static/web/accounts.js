@@ -44,13 +44,30 @@ const options = {
                 .catch((error) => console.log(error));
         },
         createAccount() {
+            Swal.fire({
+                icon: 'question',
+                text: '¿Are you sure you want to create a account ?',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No'
+              }).then((result) => {
+                if (result.isConfirmed) {
+
                     axios.post("/api/clients/current/accounts", `type=${this.selectType}`)
                         .then(response => {
                             console.log(response.data);
                             this.selectType = {};
-                            document.location.reload()
-
                             
+                            Swal.fire({
+                                icon: 'success',
+                                text: 'You have requested a new account',
+                                showConfirmButton: false,
+                              });
+                              setTimeout(() => {
+                                window.location.href = "http://localhost:8080/web/accounts.html"
+                              }, 1000)
+                            })
+                        }
                         }).catch((error) => console.log(error));
                 }, 
         applyloans(){
@@ -58,22 +75,59 @@ const options = {
 
         },
         removeAccounts(){
+            Swal.fire({
+                icon: 'question',
+                text: '¿Are you sure you want to delete the account?',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No'
+              }).then((result) => {
+                if (result.isConfirmed) {
+
             axios.patch(`/api/clients/current/accounts/${this.selectedAccount.id}`)
             .then(response => {
                 this.selectedAccount = {};
-                window.location.href = "http://localhost:8080/web/accounts.html"
 
-            }).catch(error => {
+                Swal.fire({
+                    icon: 'success',
+                    text: 'You deleted your account!',
+                    showConfirmButton: false,
+                  });
+                  setTimeout(() => {
+                    window.location.href = "http://localhost:8080/web/accounts.html"
+                  }, 1000)
+                })
+            }
+                setTimeout(() => {
+                    window.location.href = "http://localhost:8080/web/accounts.html"
+                }, 2000)
+
+            }).catch((error) => {
                 console.log(error.response.data);
-              });
+                Swal.fire({
+                  icon: 'error',
+                  text: 'Account cannot be deleted because it contains money',
+                  showConfirmButton: false,
+                });
+                setTimeout(() => {
+                  // Puedes agregar aquí cualquier acción adicional si es necesario
+                }, 1000)
+              })
         },
         payLoan(){
             axios.patch(`/api/loans?id=${this.selectedLoan.id}&accountNumber=${this.selectedAccountLoan.number}`)
             .then(response => {
                 console.log(response.data);
                 this.selectedLoan = {};
-                window.location.href = "http://localhost:8080/web/accounts.html"
+                Swal.fire({
+                    icon: 'success',
+                    text: 'You paid your loan!',
+                    showConfirmButton: false,
 
+                });
+                setTimeout(() => {
+                    window.location.href = "http://localhost:8080/web/accounts.html"
+                }, 2000)
 
 
             }).catch(error => {

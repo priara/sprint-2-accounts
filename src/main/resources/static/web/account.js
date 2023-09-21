@@ -48,13 +48,6 @@ const options = {
                 })
                 .catch((error) => console.log(error));
         },
-        PDF(){
-            axios.get("http://localhost:8080/transactions/generate-pdf")
-            .then(response => {
-                console.log(response);
-            })
-
-        },
         getTransactionColorClass(transaction) {
             if (transaction.type === this.creditGreen) {
                 return "creditGreen";
