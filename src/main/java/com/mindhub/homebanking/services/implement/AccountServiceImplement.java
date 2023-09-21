@@ -34,6 +34,11 @@ public class AccountServiceImplement implements AccountService {
     }
 
     @Override
+    public Boolean existsByNumber(String number) {
+        return accountRepository.existsByNumber(number);
+    }
+
+    @Override
     public void addAccount(Account account) {
         accountRepository.save(account);
     }

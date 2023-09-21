@@ -37,17 +37,17 @@
 
 <main>
 
-    <section class="d-flex flex-column align-items-center justify-content-around gap-4">
+    <section class="d-flex flex-column align-items-center justify-content-around gap-3 pb-5">
       
       <section class="sectioncards1 d-flex flex-column flex-lg-row align-items-center justify-content-around p-3">
-        <h1 class="h1cards">Your Cards</h1>
-        <img class="imgilust" src="./images/3588982-removebg-preview.png" alt="">
+        <h1 class="h1cards p-0">Your Cards</h1>
+        
       </section>
         
 
 
-        <div  class="d-flex flex-column align-items-center gap-5 p-5">
-          <div class="d-flex  gap-4">
+        <div  class="d-flex flex-column align-items-center gap-5">
+          <div class="d-flex gap-4">
             <button v-if="cards.length < 6" type="button" v-on:click="createCards" class="buttonApply mt-3 p-2"> CREATE CARD </button>
           
             <button type="button" class="buttonremove mt-3 p-2" data-bs-toggle="modal" data-bs-target="#myModal">
@@ -162,7 +162,7 @@
           </div>
         </section>
 
-        <section class="sectiondivs d-flex flex-column align-items-center flex-lg-row justify-content-around gap-3 p-4">
+        <section class="sectiondivs d-flex flex-column align-items-center flex-lg-row justify-content-around gap-3 p-4 ">
           <div class="div-contact">
             <a href="https://www.google.com.ar/maps/@-34.6144254,-58.4059338,15z?entry=ttu"><img src="./images/location.png" alt=""></a>
             <p>Branches and ATMs</p>

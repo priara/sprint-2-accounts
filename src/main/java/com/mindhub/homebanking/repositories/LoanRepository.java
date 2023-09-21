@@ -9,6 +9,8 @@ public interface LoanRepository extends JpaRepository<Loan, Long> {
 
         Loan findByName(String name);
 
+        Boolean existsByName( String name);
+
 
 
 }

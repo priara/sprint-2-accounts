@@ -28,7 +28,7 @@ const options = {
                 axios.get("http://localhost:8080/api/clients/current")
                 .then(response => {
                     this.client = response.data;
-                    this.accounts = this.client.accounts.sort((a,b) => a.id - b.id);
+                    this.accounts = this.client.accounts.sort((a,b) => a.id - b.id).filter(account => account.active);
                     console.log(this.accounts);
 
 

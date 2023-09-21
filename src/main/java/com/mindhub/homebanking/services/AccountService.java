@@ -15,6 +15,8 @@ public interface AccountService {
 
     Account findByNumber(String number);
 
+    Boolean existsByNumber(String number);
+
     void addAccount (Account account);
 
     Account findByNumberAndClient(String number, Client client);

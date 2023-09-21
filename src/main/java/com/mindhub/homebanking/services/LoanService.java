@@ -15,5 +15,7 @@ public interface LoanService {
 
     void saveLoan(Loan loan);
 
+    boolean existsByName(String name);
+
 
 }

@@ -37,4 +37,6 @@ public class LoanApplicationDTO {
     public String getName() {
         return name;
     }
+
+
 }

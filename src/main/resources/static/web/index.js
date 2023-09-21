@@ -37,7 +37,7 @@ const options = {
                 setTimeout(() => {
                   console.log(this.email);
                   if (this.email.includes("admin")) {
-                    window.location.href = "http://localhost:8080/manager.html";
+                    window.location.href = "http://localhost:8080/web/admin/manager.html";
                   } else {
                     window.location.href = "http://localhost:8080/web/accounts.html";
                 }

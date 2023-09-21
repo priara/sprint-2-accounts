@@ -40,13 +40,20 @@ const options = {
                     console.log(response);
                     this.accountSelect = response.data;
                     console.log(this.accountSelect);
-                    this.transactions = response.data.transaction;
+                    this.transactions = response.data.transaction.sort((a, b) => a.id - b.id);
                     console.log(this.transactions);
                     
 
 
                 })
                 .catch((error) => console.log(error));
+        },
+        PDF(){
+            axios.get("http://localhost:8080/transactions/generate-pdf")
+            .then(response => {
+                console.log(response);
+            })
+
         },
         getTransactionColorClass(transaction) {
             if (transaction.type === this.creditGreen) {

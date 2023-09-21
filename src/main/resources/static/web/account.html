@@ -17,139 +17,150 @@
 <body>
     <div id="app">
         <header
-    class="d-flex flex-column justify-content-between  gap-3 align-items-center flex-lg-row justify-content-md-around">
-    <div class="d-flex flex-column flex-lg-row align-items-center">
-        <h2 class="">Mindhub Brothers Bank</h2>
-        <img class="imgicon" src="./images/banco.png" alt="">
-    </div>
-    <nav class="d-flex flex-column justify-content-end flex-lg-row align-items-center gap-3 gap-md-4 m-2">
-        <a class=" anchorfav" href="./accounts.html"><span></span>Accounts <span class="ms-2">|</span></a>
-        <a class=" anchors" href="./cards.html">Cards <span class="ms-2">|</span></a>
-        <a class="anchors" href="./loan-application.html">Loans <span class="ms-2">|</span></a>
-        <a class="anchors text-info" href="./transfers.html">Transactions <span class="ms-2">|</span></a>
-        <button type="button" v-on:click="logout" class="button rounded-5 p-2"><span><img class="imgnav "
-                    src="./images/exit.png" alt=""></span></button>
-    </nav>
+            class="d-flex flex-column justify-content-between  gap-3 align-items-center flex-lg-row justify-content-md-around">
+            <div class="d-flex flex-column flex-lg-row align-items-center">
+                <h2 class="">Mindhub Brothers Bank</h2>
+                <img class="imgicon" src="./images/banco.png" alt="">
+            </div>
+            <nav class="d-flex flex-column justify-content-end flex-lg-row align-items-center gap-3 gap-md-4 m-2">
+                <a class=" anchorfav" href="./accounts.html"><span></span>Accounts <span class="ms-2">|</span></a>
+                <a class=" anchors" href="./cards.html">Cards <span class="ms-2">|</span></a>
+                <a class="anchors" href="./loan-application.html">Loans <span class="ms-2">|</span></a>
+                <a class="anchors text-info" href="./transfers.html">Transactions <span class="ms-2">|</span></a>
+                <button type="button" v-on:click="logout" class="button rounded-5 p-2"><span><img class="imgnav "
+                            src="./images/exit.png" alt=""></span></button>
+            </nav>
 
 
-</header>
+        </header>
 
-    <main class=" d-flex flex-column">
-        <section class="d-flex flex-column align-items-start ">
-            <h1 class=" ms-2 fw-medium text-dark">Account Selected</h1>
-        </section>
+        <main class=" d-flex flex-column">
+            <section class="d-flex flex-column align-items-start ">
+                <h1 class=" ms-2 fw-medium text-dark">Account Selected</h1>
+            </section>
 
-        <div class=" d-flex flex-wrap justify-content-center align-items-center gap-5 ">
+            <div class=" d-flex flex-wrap justify-content-center align-items-center gap-5 ">
 
-            <article class="article-wrapper col-10 col-md-4 gap-2">
-                <div class="project-info">
-                    <div class="flex-pr">
-                        <div class="project-title fs-4 text " v-cloak>Account Number : {{accountSelect.number}}</div>
+                <article class="article-wrapper col-10 col-md-4 gap-2">
+                    <div class="project-info">
+                        <div class="flex-pr">
+                            <div class="project-title fs-4 text " v-cloak>Account Number : {{accountSelect.number}}
+                            </div>
 
+                        </div>
+                        <div class="types">
+                            <span style=" color: black;" class="project-type fs-6 text" v-cloak>Amount :
+                                {{formatter.format(accountSelect.balance)}}</span>
+                            <span class="project-type fs-6 text" v-cloak>Creation Date : {{accountSelect.creationDate}}
+                            </span>
+                        </div>
                     </div>
-                    <div class="types">
-                        <span style=" color: black;" class="project-type fs-6 text" v-cloak>Amount :
-                            {{formatter.format(accountSelect.balance)}}</span>
-                        <span class="project-type fs-6 text" v-cloak>Creation Date : {{accountSelect.creationDate}} </span>
-                    </div>
-                </div>
-            </article>
+                </article>
 
-            <section class="col-12 col-sm-10 col-md-8 col-lg-6 d-flex flex-column align-items-center mt-5">
+                <section class="col-12 col-sm-10 col-md-8 col-lg-6 d-flex flex-column align-items-center gap-2 p-4">
 
-                <h2 class="text-dark">Transactions Resume :</h2>
-                
+                    <h2 class="text-dark">Transactions Resume :</h2>
 
-
-                    <div class="overflow-auto ">
-                        <table class="table ">
+                    <div class="overflow-auto col-12 ">
+                        <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col" >Type</th>
-                                    <th scope="col" >Amount</th>
-                                    <th scope="col" >Data</th>
-                                    <th scope="col" >Description</th>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Amount</th>
+                                    <th scope="col">Data</th>
+                                    <th scope="col">Description</th>
                                     <th scope="col">Current Balance</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <template v-for="transaction of transactions">
-                                <tr>
-                                    <td v-cloak v-bind:class="getTransactionColorClass(transaction)">{{transaction.type}}</td>
-                                    <td v-cloak> {{formatter.format(transaction.amount)}}</td>
-                                    <td v-cloak>{{formattedDate(transaction.date)}}</td>
-                                    <td v-cloak>{{transaction.description}}</td>
-                                    <td v-cloak>{{transaction.currentBalance}}</td>
-                                </tr>
+                                    <tr>
+                                        <td v-cloak v-bind:class="getTransactionColorClass(transaction)">
+                                            {{transaction.type}}</td>
+                                        <td v-cloak> {{formatter.format(transaction.amount)}}</td>
+                                        <td v-cloak>{{formattedDate(transaction.date)}}</td>
+                                        <td v-cloak>{{transaction.description}}</td>
+                                        <td v-cloak>${{transaction.currentBalance.toLocaleString()}}</td>
+                                    </tr>
                                 </template>
                             </tbody>
                         </table>
                     </div>
-                
-            </section>
-        </div>
+
+                    <label for="meeting-time">Choose a time for your appointment:</label>
+
+                    <input type="datetime-local" id="meeting-time" name="meeting-time" />
+                    <input type="datetime-local" id="meeting-time" name="meeting-time" />
+
+                </section>
+            </div>
     </div>
 
     <div id="carouselExampleIndicators" class="carousel slide mb-3">
         <div class="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                aria-label="Slide 3"></button>
         </div>
         <div class="carousel-inner">
-          <div class="carousel-item active d-item">
-            <img src="./images/people.jpg" class="d-block w-100 d-img" alt="slider 1">
-            <div class="carousel-caption top-1 mt-4">
-                <p class="mt-5 fs-3 text-uppercase"> International Banking
-                    Imagine a Bank That Cares About You, Wherever You Are</p>
+            <div class="carousel-item active d-item">
+                <img src="./images/people.jpg" class="d-block w-100 d-img" alt="slider 1">
+                <div class="carousel-caption top-1 mt-4">
+                    <p class="mt-5 fs-3 text-uppercase"> International Banking
+                        Imagine a Bank That Cares About You, Wherever You Are</p>
+                </div>
             </div>
-          </div>
-          <div class="carousel-item d-item">
-            <img src="./images/super.jpg" class="d-block w-100 d-img" alt="slider 2">
-            <div class="carousel-caption top-1 mt-0">
-                <p class="mt-5 fs-3 text-uppercase "> International Premier Checking
-                    Higher Interest Earnings & Competitive Rates with a U.S.-based account</p>
+            <div class="carousel-item d-item">
+                <img src="./images/super.jpg" class="d-block w-100 d-img" alt="slider 2">
+                <div class="carousel-caption top-1 mt-0">
+                    <p class="mt-5 fs-3 text-uppercase "> International Premier Checking
+                        Higher Interest Earnings & Competitive Rates with a U.S.-based account</p>
+                </div>
             </div>
-          </div>
-          <div class="carousel-item d-item">
-            <img src="./images/girl.jpg" class="d-block w-100 d-img" alt="slider 3">
-            <div class="carousel-caption top-1 mt-4 ">
-                <p class="mt-5 fs-3 text-uppercase "> Buying a home within your comfort zone</p>
+            <div class="carousel-item d-item">
+                <img src="./images/girl.jpg" class="d-block w-100 d-img" alt="slider 3">
+                <div class="carousel-caption top-1 mt-4 ">
+                    <p class="mt-5 fs-3 text-uppercase "> Buying a home within your comfort zone</p>
+                </div>
             </div>
-          </div>
-          <div class="carousel-item d-item">
-            <img src="./images/girlshopping.jpg" class="d-block w-100 d-img" alt="slider 4">
-            <div class="carousel-caption top-1 mt-4">
-                <p class="mt-5 fs-3 text-uppercase "> 6 simple steps to jump-start your emergency fund</p>
+            <div class="carousel-item d-item">
+                <img src="./images/girlshopping.jpg" class="d-block w-100 d-img" alt="slider 4">
+                <div class="carousel-caption top-1 mt-4">
+                    <p class="mt-5 fs-3 text-uppercase "> 6 simple steps to jump-start your emergency fund</p>
+                </div>
             </div>
-          </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
         </button>
-      </div>
+    </div>
 
     </main>
 
     <footer class="d-flex flex-column align-items-center flex-lg-row justify-content-lg-between gap-2 p-3">
         <p class="text-center mb-0  text-light"> Mindhub Brothers - 2023</p>
         <div class="d-flex flex-column align-items-center mt-3">
-          <p class="text-light">Contact Us</p>
-          <p class="text-light">Director: Priscila Araujo</p>
-          <a class="cel" href="tel:+1126360835">Cel: 1126360835</a>
+            <p class="text-light">Contact Us</p>
+            <p class="text-light">Director: Priscila Araujo</p>
+            <a class="cel" href="tel:+1126360835">Cel: 1126360835</a>
         </div>
-  
+
         <div class="d-flex flex-column align-items-center ">
             <p class="text-light">Connect with us</p>
             <div>
-              <a href="https://www.instagram.com/"><img class="imgredes" src="./images/insta.png" alt=""></a>
-              <a href="https://web.whatsapp.com/"><img class="imgredes" src="./images/wpp.png" alt=""></a>
-              <a href="https://www.facebook.com/"><img class="imgredes" src="./images/face.png" alt="" ></a>
+                <a href="https://www.instagram.com/"><img class="imgredes" src="./images/insta.png" alt=""></a>
+                <a href="https://web.whatsapp.com/"><img class="imgredes" src="./images/wpp.png" alt=""></a>
+                <a href="https://www.facebook.com/"><img class="imgredes" src="./images/face.png" alt=""></a>
             </div>
         </div>
     </footer>

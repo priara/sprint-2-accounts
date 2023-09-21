@@ -82,6 +82,8 @@ nav a{
   width: 100%!important;
 }
 
+
+
 /* CAROUSEL */
 
 .d-item{
@@ -95,8 +97,8 @@ nav a{
 
 
 /* card */
+
 .article-wrapper {
-    height: 10rem;
     -webkit-transition: 0.15s all ease-in-out;
     transition: 0.15s all ease-in-out;
     border-radius: 10px;
@@ -123,11 +125,18 @@ nav a{
   }
   
   .types {
-    gap: 10px;
-    display: -webkit-box;
-    display: -ms-flexbox;
+    gap: 3rem;
     display: flex;
-    place-content: flex-start;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+  }
+
+  @media screen and (max-width: 800px){
+    .types{
+      gap: 1rem;
+    }
   }
   
   .rounded-lg {
@@ -153,6 +162,7 @@ nav a{
     -ms-flex-direction: column;
     flex-direction: column;
     gap: 20px;
+    height: 100%;
   }
   
   .project-title {
@@ -180,11 +190,7 @@ nav a{
   .project-type {
     color: black;
     font-weight: bold;
-    padding: 0.3em 0.7em;
-    border-radius: 15px;
     font-size: 1rem;
-    letter-spacing: -0.6px;
-    width: 15rem;
   }
   
   .project-hover {
@@ -207,10 +213,6 @@ nav a{
   border: 1px solid black;
   
   color: rgb(0, 0, 0)!important;
-}
-table{
-  width: 35rem!important;
-  
 }
 .table{
   border-radius: 20px!important;
@@ -772,7 +774,7 @@ FORM */
   color: white;
   font-size: 1rem;
   border: 2px solid #011936;
-  padding: 1rem;
+  padding: 0.5rem;
 }
 .buttonremove{
   background-color: white;
@@ -784,5 +786,30 @@ FORM */
   width: 2rem;
 }
 
-
-
+/* LOAN PAY */
+.buttonPay{
+  background-color: white;
+  border: 2px solid white;
+  color: black;
+  border-radius: 3rem;
+}
+#sectionLoan{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+#articleLoan{
+  min-height: 12rem!important;
+}
+.modal{
+  width: 80%!important;
+  left: auto;
+}
+@media screen and (max-width: 400px){
+  .modal{
+    width: 70%!important;
+  }
+}

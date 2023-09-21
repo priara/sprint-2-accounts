@@ -1,0 +1,122 @@
+* {
+    font-family: 'Rokkitt', serif;
+}
+
+body {
+    background-color: #b4bce9 !important;
+}
+
+[v-cloak] {
+    display: none;
+}
+
+.imgnav {
+    width: 1.5rem;
+}
+
+.imgicon {
+    width: 5rem;
+}
+
+h2 {
+    color: white !important;
+}
+
+nav>a:hover {
+    color: #66bee1 !important;
+}
+
+.anchorfav {
+    color: rgb(67, 199, 217) !important;
+}
+
+.anchors {
+    color: white !important;
+}
+
+.anchorarticle {
+    color: #093975;
+}
+
+header {
+    background-color: #011936;
+    min-height: 10vh;
+    position: sticky;
+    width: 100% !important;
+}
+
+nav {
+    width: 60%;
+}
+
+footer {
+    min-height: 10vh;
+    background-color: #011936;
+}
+
+.imgredes {
+    width: 1.2rem;
+}
+
+.cel {
+    text-decoration: none;
+    color: white;
+}
+
+nav a {
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.button {
+    background-color: rgb(138, 184, 229);
+    border: rgb(138, 184, 229);
+}
+main{
+    background-color: #b4bce9!important;
+    min-height: 80vh;
+    width: 100%!important;
+}
+
+.formloan{
+    display: flex;
+  flex-direction: column;
+  width: 30rem;
+  background-color: #355891;
+  border-radius: 10px;
+  position: relative;
+  height: 30rem!important;
+  padding: 2rem;
+  gap: 0.5rem;
+  color: white;
+}
+.buttonform{
+    width: 30%;
+    color: black;
+    background-color: white;
+}
+
+@media screen and (min-width:320px) and (max-width: 520px){
+    .imgadmin{
+        width: 18rem;
+    }
+    .formloan{
+        width: 18rem;
+    }
+    .buttonform{
+        width: 50%;
+    }
+}
+@media screen and (min-width:520px) and (max-width: 600px){
+    .imgadmin{
+        width: 25rem;
+    }
+    .formloan{
+        width: 20rem;
+    }
+}
+@media screen and (min-width:600px) and (max-width: 900px){
+    .imgadmin{
+        width: 30rem;
+    }
+}

@@ -24,6 +24,8 @@ public class ClientDTO {
 
     private Set<CardDTO> cards;
 
+
+
     public ClientDTO() {
 
     }
@@ -77,9 +79,6 @@ public class ClientDTO {
         return accounts;
     }
 
-    public void setAccounts(Set<AccountDTO> accounts) {
-        this.accounts = accounts;
-    }
     public Set<ClientLoanDTO> getLoans() {
         return loans;
     }

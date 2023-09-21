@@ -12,9 +12,10 @@ const options = {
                 currency: 'USD',
                 minimumFractionDigits: 0
             }),
-            accountsLength: 0,
             selectedAccount:[],
             selectType:[],
+            selectedLoan:[],
+            selectedAccountLoan:[],
 
         }
     },
@@ -33,18 +34,19 @@ const options = {
                 .then(response => {
                     console.log(response);
                     this.client = response.data;
-                    this.accounts = this.client.accounts.filter(account => account.active);
-                    this.loans = this.client.loans;
+                    console.log(this.client);
+                    this.accounts = this.client.accounts.filter(account => account.active).sort((a, b) => a.id - b.id);
+                    this.loans = this.client.loans.filter(loan => loan.active).sort((a, b) => a.id - b.id);
                     console.log(this.loans);
-                    this.accounts.sort((a, b) => a.id - b.id);
-                    this.loans.sort((a, b) => a.id - b.id);
+
+                    
                 })
                 .catch((error) => console.log(error));
         },
         createAccount() {
                     axios.post("/api/clients/current/accounts", `type=${this.selectType}`)
                         .then(response => {
-                            console.log(response);
+                            console.log(response.data);
                             this.selectType = {};
                             document.location.reload()
 
@@ -64,6 +66,21 @@ const options = {
             }).catch(error => {
                 console.log(error.response.data);
               });
+        },
+        payLoan(){
+            axios.patch(`/api/loans?id=${this.selectedLoan.id}&accountNumber=${this.selectedAccountLoan.number}`)
+            .then(response => {
+                console.log(response.data);
+                this.selectedLoan = {};
+                window.location.href = "http://localhost:8080/web/accounts.html"
+
+
+
+            }).catch(error => {
+                console.log(error.response.data);
+              });
+
+
         },
         logout() {
             axios.post("/api/logout")

@@ -23,19 +23,21 @@ import javax.servlet.http.HttpSession;
 
             http.authorizeRequests()
 
-                    .antMatchers("/web/index.html", "/web/index.js","/web/styleindex.css","/web/images/**").permitAll()
+                    .antMatchers("/web/index.html", "/web/index.js","/web/styleindex.css","/web/images/**", "/api/loans").permitAll()
 
                     .antMatchers(HttpMethod.POST,"/api/login", "/api/logout", "/api/clients").permitAll()
 
-                    .antMatchers(HttpMethod.GET,"/api/clients/current", "/api/loans").hasAuthority("CLIENT")
+                    .antMatchers(HttpMethod.GET,"/api/clients/current", "/transactions/generate-pdf").hasAuthority("CLIENT")
 
-                    .antMatchers(HttpMethod.POST,"/api/clients/current/cards","/api/transactions", "/api/loans").hasAuthority("CLIENT")
+                    .antMatchers(HttpMethod.POST, "/api/loans/create").hasAuthority("ADMIN")
+
+                    .antMatchers(HttpMethod.POST,"/api/clients/current/cards","/api/transactions").hasAuthority("CLIENT")
 
                     .antMatchers(HttpMethod.GET, "/api/clients","/rest/**").hasAuthority("ADMIN")
 
-                    .antMatchers(HttpMethod.PATCH, "/api/clients/current/cards/{id}", "/api/clients/current/accounts/{id}").hasAuthority("CLIENT")
+                    .antMatchers(HttpMethod.PATCH, "/api/clients/current/cards/{id}", "/api/clients/current/accounts/{id}", "/api/loans").hasAuthority("CLIENT")
 
-                    .antMatchers("/manager.html", "/manager.js").hasAuthority("ADMIN")
+                    .antMatchers("/web/admin/manager.html", "/web/admin/manager.js","/web/admin/style.css").hasAuthority("ADMIN")
 
                     .antMatchers("/web/account.html","/web/cards.html","/web/cards.js","/web/style.css","/web/accounts.html", "/web/create-cards.html","/web/create-cards.js","/web/transfers.html", "/web/transfers.js").hasAuthority("CLIENT")
 

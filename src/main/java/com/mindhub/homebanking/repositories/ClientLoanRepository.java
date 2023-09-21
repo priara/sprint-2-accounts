@@ -10,4 +10,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 public interface ClientLoanRepository extends JpaRepository<ClientLoan, Long> {
 
     boolean existsByClientAndLoan(Client client, Loan loan);
+
+    ClientLoan getById(Long id);
+
 }

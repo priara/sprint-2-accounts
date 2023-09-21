@@ -1,14 +1,7 @@
 package com.mindhub.homebanking.dto;
-
-import com.mindhub.homebanking.models.ClientLoan;
 import com.mindhub.homebanking.models.Loan;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class LoanDTO {
 
@@ -16,11 +9,13 @@ public class LoanDTO {
 
     private String name;
 
-    private double maxAmount;
+    private Double maxAmount;
 
     private List<Integer> payments;
 
     private Double percentage;
+
+
 
     public LoanDTO() {
     }
@@ -41,7 +36,7 @@ public class LoanDTO {
         return name;
     }
 
-    public double getMaxAmount() {
+    public Double getMaxAmount() {
         return maxAmount;
     }
 

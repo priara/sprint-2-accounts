@@ -14,6 +14,13 @@ public class ClientLoanDTO {
 
     private int payments;
 
+
+    private Boolean active;
+
+    private int paymentsLeft;
+
+    private double remainingAmount;
+
     public ClientLoanDTO() {
     }
 
@@ -23,6 +30,9 @@ public class ClientLoanDTO {
         this.id = clientLoan.getId();
         this.amount = clientLoan.getAmount();
         this.payments = clientLoan.getPayments();
+        this.paymentsLeft = clientLoan.getPaymentsLeft();
+        this.active = clientLoan.getActive();
+        this.remainingAmount=clientLoan.getRemainingAmount();
     }
 
 
@@ -46,5 +56,17 @@ public class ClientLoanDTO {
 
     public int getPayments() {
         return payments;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public int getPaymentsLeft() {
+        return paymentsLeft;
+    }
+
+    public double getRemainingAmount() {
+        return remainingAmount;
     }
 }

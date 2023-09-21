@@ -24,6 +24,7 @@ public class Client {
 
     private String password;
 
+
     @OneToMany(mappedBy="client", fetch=FetchType.EAGER)
     private Set<Account> accounts = new HashSet<>();
 

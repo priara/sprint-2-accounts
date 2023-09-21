@@ -47,7 +47,7 @@
       <section class="sectionaccounts d-flex flex-column align-items-center gap-4">
         <h3 class="borderh2">Your Accounts</h3>
         <div class="d-flex gap-3 justify-content-center">
-          <button v-if="accountsLength < 3" data-bs-toggle="modal" data-bs-target="#myModalCreate" type="button" class="buttonApply  mt-3 p-2"> Create Account </button>
+          <button v-if="accounts.length < 3" data-bs-toggle="modal" data-bs-target="#myModalCreate" type="button" class="buttonApply  mt-3 p-2"> Create Account </button>
       
           <button type="button" class="buttonremove mt-3 p-2" data-bs-toggle="modal" data-bs-target="#myModal">
           <span><img class="imgremove" src="./images/removecard.png" alt=""></span> Remove Account
@@ -104,7 +104,7 @@
         
         <template v-if="accounts.length > 0" v-for=" account of accounts " :key="accounts.id">
 
-            <article class="article-wrapper col-6 col-sm-6 col-md-8 col-lg-8 gap-2">
+            <article class="article-wrapper col-6 col-sm-6 col-md-4 col-lg-6 gap-2">
                 <div class="project-info">
                   <div class="flex-pr">
                     <div class="project-title fs-4 text">{{account.type}} ACCOUNT</div>
@@ -129,23 +129,64 @@
       </section>
 
         
+      <section class="d-flex flex-column align-items-center gap-2">
+        <h3 class="borderh2">Your Loans</h3>
+        
 
+        <!-- MODAL PAGAR CUOTA PRESTAMO -->
+      
+          <button class="buttonApply" v-on:click.prevent="applyloans"> Apply Loan </button>
+          <button type="button" class="buttonPay mt-3 p-2" data-bs-toggle="modal" data-bs-target="#myModalLoan">Pay Loan</button>
+      
+        
+        <div class="modal fade" id="myModalLoan" tabindex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Select the loan you want to pay</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
 
-        <section class="d-flex flex-column align-items-center col-12 gap-4 p-4">
+              <select v-model="selectedLoan"  class="form-select" aria-label="Default select example">
 
-          <h3 class="borderh2">Your Loans</h3>
-          <button class="buttonApply" v-on:click.prevent="applyloans"> Apply </button>
+                <template v-for="loan in loans" >
+                  <option :value="loan">{{loan.name}} | ${{(loan.amount / loan.payments).toFixed(2)}}</option>
+
+                </template>
+                
+              </select>
+
+              <select v-model="selectedAccountLoan"  class="form-select" aria-label="Default select example">
+
+                <template v-for="account in accounts" >
+                  <option :value="account">{{account.number}} | ${{account.balance.toFixed(2)}}</option>
+                </template>
+                
+              </select>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button v-on:click ="payLoan" type="button" class="btn btn-primary">Pay</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </section>
+      
+        <section id="sectionLoan" class="d-flex flex-wrap">
         <template v-if="loans.length > 0" v-for=" loan of loans ">
 
-          <article class="article-wrapper articleloans col-12 col-md-8 col-lg-6 gap-2">
+          <article id="articleLoan" class="article-wrapper articleloans col-10 col-lg-4">
             <div class="project-info">
                 <div class="flex-pr">
                     <div class="project-title project-loans fs-4 text " v-cloak>Loan {{loan.name}}</div>
-
                 </div>
                 <div class="types">
-                    <span  style=" color: black;" class="project-type project-type-loans fs-6 text"  v-cloak>Amount : {{ formatter.format(loan.amount) }}</span>
-                    <span class="project-type fs-6 text project-type-loans" v-cloak>Payments : {{loan.payments}} </span>
+                    <p  style=" color: black;" class="project-type project-type-loans "  v-cloak>Amount: {{ formatter.format(loan.amount) }}</p>
+                    <p  style=" color: black;" class="project-type project-type-loans "  v-cloak>Remaining Amount: {{ formatter.format(loan.remainingAmount) }}</p>
+                      <p  class="project-type  project-type-loans" v-cloak>Payments : {{loan.payments}} </p>
+                      <p  class="project-type  project-type-loans" v-cloak>Payments Left : {{loan.paymentsLeft}}</p>
+                    
                 </div>
             </div>
         </article>
@@ -209,7 +250,7 @@
       </button>
     </div>
 
-          <article class="articleaccounts d-flex flex-column align-items-center p-3" >
+          <article class="articleaccounts d-flex flex-column align-items-center p-2" >
 
             <h2 class="text-dark">Choose the card that works for you</h2>
 
@@ -271,7 +312,7 @@
           </article>
 
 
-          <section class="sectiondivs d-flex flex-column align-items-center flex-lg-row justify-content-around gap-3 p-4 ">
+          <section class="sectiondivs d-flex flex-column align-items-center flex-lg-row justify-content-around gap-3 p-2">
             <div class="div-contact">
               <a href="https://www.google.com.ar/maps/@-34.6144254,-58.4059338,15z?entry=ttu"><img src="./images/location.png" alt=""></a>
               <p>Branches and ATMs</p>

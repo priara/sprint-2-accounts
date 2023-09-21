@@ -16,9 +16,10 @@ public class TransactionDTO {
 
     private String description;
 
-    private double currentBalance;
+    private Double currentBalance;
 
     private Boolean active;
+
     public TransactionDTO() {
     }
 
@@ -58,7 +59,7 @@ public class TransactionDTO {
         return description;
     }
 
-    public double getCurrentBalance() {
+    public Double getCurrentBalance() {
         return currentBalance;
     }
 

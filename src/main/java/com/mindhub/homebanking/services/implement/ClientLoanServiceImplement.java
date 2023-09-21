@@ -8,6 +8,8 @@ import com.mindhub.homebanking.services.ClientLoanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class ClientLoanServiceImplement implements ClientLoanService {
 
@@ -23,4 +25,11 @@ public class ClientLoanServiceImplement implements ClientLoanService {
     public boolean existsByClientAndLoan(Client client, Loan loan) {
         return clientLoanRepository.existsByClientAndLoan(client, loan);
     }
+
+    @Override
+    public ClientLoan findById(Long id) {
+        return null;
+    }
+
+
 }
